@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Download, Sparkles } from 'lucide-react';
+import { Download } from 'lucide-react';
 import Link from 'next/link';
 import { Pill } from '@/components/ui/Pill';
 
@@ -48,7 +48,7 @@ export function BookSection() {
   };
 
   return (
-    <section className="section-padding bg-[#0F1624] overflow-hidden text-white relative">
+    <section className="section-padding bg-background-hero overflow-hidden text-white relative">
       {/* Background radial glow */}
       <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-blue/10 blur-[120px] rounded-full pointer-events-none" />
 
@@ -87,12 +87,12 @@ export function BookSection() {
                 style={{ transform: "translateZ(-32px)" }}
               />
 
-              {/* Main Book Visual Container */}
+              {/* Main Book Visual Container with Crossfade */}
               <div 
                 className="absolute inset-0 z-10 overflow-hidden rounded-lg shadow-[50px_50px_100px_rgba(0,0,0,0.8)] border border-white/10"
                 style={{ transform: "translateZ(0px)" }}
               >
-                {/* Front Image */}
+                {/* Front Image (Image 1) */}
                 <motion.div 
                   className="absolute inset-0"
                   animate={{ opacity: isHovered ? 0 : 1 }}
@@ -100,14 +100,14 @@ export function BookSection() {
                 >
                   <Image
                     src={frontImage}
-                    alt="The Quantum Advantage"
+                    alt="The Quantum Advantage Front"
                     fill
                     className="object-cover"
                     priority
                   />
                 </motion.div>
 
-                {/* Hover Image */}
+                {/* Hover Image (Image 2) */}
                 <motion.div 
                   className="absolute inset-0"
                   initial={{ opacity: 0 }}
@@ -116,7 +116,7 @@ export function BookSection() {
                 >
                   <Image
                     src={hoverImage}
-                    alt="The Quantum Advantage Detail"
+                    alt="The Quantum Advantage Angle"
                     fill
                     className="object-cover"
                   />
@@ -133,17 +133,6 @@ export function BookSection() {
                   className="absolute -inset-full pointer-events-none mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 />
               </div>
-            </motion.div>
-
-            {/* Research Distilled Badge */}
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 z-20 flex-col items-center justify-center w-24 h-32 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl"
-            >
-              <div className="text-accent-blue font-bold text-xl">2.5yr</div>
-              <div className="text-[8px] label-mono text-white/50 text-center px-2 mt-1">RESEARCH DISTILLED</div>
             </motion.div>
           </div>
 
@@ -182,25 +171,6 @@ export function BookSection() {
                   Free Chapter Preview
                 </Link>
               </Button>
-            </div>
-
-            {/* Trust Element */}
-            <div className="mt-12 flex items-center space-x-4">
-              <div className="flex -space-x-3">
-                {[60, 61, 62].map((seed) => (
-                  <div key={seed} className="w-8 h-8 rounded-full border-2 border-[#0F1624] overflow-hidden bg-white/10 relative">
-                    <Image 
-                      src={`https://picsum.photos/seed/${seed}/64/64`} 
-                      alt="Leader" 
-                      fill 
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-              <p className="text-[9px] font-bold label-mono text-white/40 tracking-wider">
-                JOINED BY <span className="text-white/80">5,000+</span> INDUSTRY LEADERS GLOBALLY.
-              </p>
             </div>
           </div>
         </div>
