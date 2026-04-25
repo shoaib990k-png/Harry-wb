@@ -25,10 +25,16 @@
       "imageHint": "business strategy"
     },
     {
-      "id": "book-cover",
-      "description": "The Quantum Advantage book cover featuring Joel Kremer",
-      "imageUrl": "https://picsum.photos/seed/quantum-advantage/600/800",
-      "imageHint": "business technology"
+      "id": "book-front",
+      "description": "The Quantum Advantage - Front Cover",
+      "imageUrl": "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=600&h=800",
+      "imageHint": "business book"
+    },
+    {
+      "id": "book-hover",
+      "description": "The Quantum Advantage - Angled Mockup",
+      "imageUrl": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600&h=800",
+      "imageHint": "hardcover mockup"
     },
     {
       "id": "founder",
