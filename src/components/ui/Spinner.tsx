@@ -17,7 +17,7 @@ export function Spinner({ size = 'md', className, center = false }: SpinnerProps
 
   const spinnerContent = (
     <svg
-      className={cn("animate-spin text-accent-blue", sizes[size], className)}
+      className={cn("animate-spin text-accent-blue mx-auto", sizes[size], className)}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,7 @@ export function Spinner({ size = 'md', className, center = false }: SpinnerProps
 
   if (center) {
     return (
-      <div className="flex items-center justify-center w-full p-4 min-h-[100px]">
+      <div className="flex items-center justify-center w-full p-4 min-h-[100px] sm:min-h-[150px]">
         {spinnerContent}
       </div>
     );

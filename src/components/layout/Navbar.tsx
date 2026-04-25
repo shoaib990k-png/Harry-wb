@@ -20,7 +20,6 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   
-  // Pages that have a dark hero section where white text is appropriate initially
   const isDarkHeroPage = pathname === '/' || pathname === '/contact';
 
   useEffect(() => {
@@ -43,7 +42,7 @@ export function Navbar() {
           <div className="w-8 h-8 bg-accent-blue rounded flex items-center justify-center text-white font-bold text-lg">S</div>
           <span className={cn(
             "font-bold text-xl tracking-tight transition-colors",
-            scrolled || !isDarkHeroPage ? "text-text-primary" : "text-white"
+            scrolled || !isDarkHeroPage ? "text-text-primary" : "text-white drop-shadow-sm"
           )}>
             Strategic <span className="text-accent-blue">Architect</span>
           </span>

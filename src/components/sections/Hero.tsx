@@ -66,7 +66,7 @@ export function Hero() {
             data-ai-hint="technology network"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-b from-background-hero/40 via-background-hero/80 to-background-hero" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background-hero/60 via-background-hero/90 to-background-hero" />
       </div>
 
       <Container className="relative z-10">
@@ -99,10 +99,10 @@ export function Hero() {
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex flex-wrap gap-4 mb-16">
-            <Button asChild size="lg" className="bg-accent-blue hover:bg-accent-navy transition-colors h-14 px-8 min-w-[160px]">
+            <Button asChild size="lg" className="bg-accent-blue hover:bg-accent-navy text-white transition-colors h-14 px-8 min-w-[160px]">
               <Link href="/contact">Launch Partnership</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10 h-14 px-8 min-w-[160px]">
+            <Button asChild variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10 h-14 px-8 min-w-[160px]">
               <Link href="/solutions">Explore Solutions</Link>
             </Button>
           </motion.div>

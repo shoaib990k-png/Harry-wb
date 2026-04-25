@@ -21,7 +21,7 @@ export function SkeletonCard({
   className?: string 
 }) {
   return (
-    <div className={cn("p-4 sm:p-6 bg-white border border-accent-border rounded-xl space-y-4 w-full h-full flex flex-col", className)}>
+    <div className={cn("p-4 sm:p-6 bg-white border border-accent-border rounded-xl space-y-4 w-full h-full flex flex-col max-w-full overflow-hidden", className)}>
       {showImage && <SkeletonBase className="aspect-video w-full rounded-lg shrink-0" />}
       <div className="space-y-3 flex-1">
         <SkeletonBase className="h-6 w-3/4 sm:w-2/3 rounded-md" />
@@ -42,5 +42,5 @@ export function SkeletonCard({
 }
 
 export function SkeletonText({ width = "w-full", height = "h-4" }: { width?: string; height?: string }) {
-  return <SkeletonBase className={cn(height, width, "rounded-md")} />;
+  return <SkeletonBase className={cn(height, width, "rounded-md max-w-full")} />;
 }
