@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -81,7 +80,6 @@ export function ContactForm({ className }: ContactFormProps) {
       });
       setAiAdvice(result.advice);
       setSuccess(true);
-      await new Promise(resolve => setTimeout(resolve, 800));
     } catch (error) {
       console.error("Submission failed", error);
     } finally {
@@ -90,9 +88,9 @@ export function ContactForm({ className }: ContactFormProps) {
   }
 
   return (
-    <div className={cn("bg-white p-6 md:p-10 rounded-2xl border border-accent-border shadow-lg", className)}>
+    <div className={cn("bg-white p-5 md:p-8 rounded-2xl border border-accent-border shadow-xl text-text-primary", className)}>
       {/* Progress Bar */}
-      <div className="w-full h-1 bg-accent-border rounded-full mb-8 overflow-hidden">
+      <div className="w-full h-1.5 bg-accent-border rounded-full mb-6 overflow-hidden">
         <motion.div 
           className="h-full bg-accent-blue"
           initial={{ width: 0 }}
@@ -110,16 +108,16 @@ export function ContactForm({ className }: ContactFormProps) {
             exit={{ opacity: 0 }}
           >
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="firstName"
                     render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-text-primary text-xs font-bold uppercase tracking-wider">First Name</FormLabel>
+                      <FormItem className="space-y-1.5">
+                        <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-wider">First Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Jane" {...field} className="h-11 bg-background-muted/50 border-accent-border focus:border-accent-blue" />
+                          <Input placeholder="Jane" {...field} className="h-10 bg-background-muted/50 border-accent-border focus:border-accent-blue text-text-primary" />
                         </FormControl>
                         <FormMessage className="text-[10px]" />
                       </FormItem>
@@ -129,10 +127,10 @@ export function ContactForm({ className }: ContactFormProps) {
                     control={form.control}
                     name="lastName"
                     render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-text-primary text-xs font-bold uppercase tracking-wider">Last Name</FormLabel>
+                      <FormItem className="space-y-1.5">
+                        <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-wider">Last Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Doe" {...field} className="h-11 bg-background-muted/50 border-accent-border focus:border-accent-blue" />
+                          <Input placeholder="Doe" {...field} className="h-10 bg-background-muted/50 border-accent-border focus:border-accent-blue text-text-primary" />
                         </FormControl>
                         <FormMessage className="text-[10px]" />
                       </FormItem>
@@ -144,10 +142,10 @@ export function ContactForm({ className }: ContactFormProps) {
                   control={form.control}
                   name="email"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-text-primary text-xs font-bold uppercase tracking-wider">Work Email</FormLabel>
+                    <FormItem className="space-y-1.5">
+                      <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-wider">Work Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="jane@company.com" {...field} className="h-11 bg-background-muted/50 border-accent-border focus:border-accent-blue" />
+                        <Input placeholder="jane@company.com" {...field} className="h-10 bg-background-muted/50 border-accent-border focus:border-accent-blue text-text-primary" />
                       </FormControl>
                       <FormMessage className="text-[10px]" />
                     </FormItem>
@@ -158,10 +156,10 @@ export function ContactForm({ className }: ContactFormProps) {
                   control={form.control}
                   name="organization"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-text-primary text-xs font-bold uppercase tracking-wider">Organization</FormLabel>
+                    <FormItem className="space-y-1.5">
+                      <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-wider">Organization</FormLabel>
                       <FormControl>
-                        <Input placeholder="Acme Systems Inc." {...field} className="h-11 bg-background-muted/50 border-accent-border focus:border-accent-blue" />
+                        <Input placeholder="Acme Systems Inc." {...field} className="h-10 bg-background-muted/50 border-accent-border focus:border-accent-blue text-text-primary" />
                       </FormControl>
                       <FormMessage className="text-[10px]" />
                     </FormItem>
@@ -172,19 +170,19 @@ export function ContactForm({ className }: ContactFormProps) {
                   control={form.control}
                   name="primaryFocus"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-text-primary text-xs font-bold uppercase tracking-wider">Primary Focus</FormLabel>
+                    <FormItem className="space-y-1.5">
+                      <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-wider">Primary Focus</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger className="h-11 bg-background-muted/50 border-accent-border focus:border-accent-blue">
+                          <SelectTrigger className="h-10 bg-background-muted/50 border-accent-border focus:border-accent-blue text-text-primary">
                             <SelectValue placeholder="Select Focus Area" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent>
-                          <SelectItem value="Hardware Architecture">Hardware Architecture</SelectItem>
-                          <SelectItem value="Networking Protocols">Networking Protocols</SelectItem>
-                          <SelectItem value="Strategic Scaling">Strategic Scaling</SelectItem>
-                          <SelectItem value="Full Stack Integration">Full Stack Integration</SelectItem>
+                        <SelectContent className="bg-white border-accent-border">
+                          <SelectItem value="Hardware Architecture" className="text-text-primary">Hardware Architecture</SelectItem>
+                          <SelectItem value="Networking Protocols" className="text-text-primary">Networking Protocols</SelectItem>
+                          <SelectItem value="Strategic Scaling" className="text-text-primary">Strategic Scaling</SelectItem>
+                          <SelectItem value="Full Stack Integration" className="text-text-primary">Full Stack Integration</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage className="text-[10px]" />
@@ -196,12 +194,12 @@ export function ContactForm({ className }: ContactFormProps) {
                   control={form.control}
                   name="challenge"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-text-primary text-xs font-bold uppercase tracking-wider">Current Challenge</FormLabel>
+                    <FormItem className="space-y-1.5">
+                      <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-wider">Current Challenge</FormLabel>
                       <FormControl>
                         <Textarea 
                           placeholder="Describe the bottlenecks you're facing..." 
-                          className="min-h-[100px] bg-background-muted/50 border-accent-border focus:border-accent-blue resize-none" 
+                          className="min-h-[80px] bg-background-muted/50 border-accent-border focus:border-accent-blue resize-none text-text-primary" 
                           {...field} 
                         />
                       </FormControl>
@@ -212,7 +210,7 @@ export function ContactForm({ className }: ContactFormProps) {
 
                 <Button 
                   type="submit" 
-                  className="w-full h-12 text-sm font-bold uppercase tracking-widest btn-hover-effect bg-accent-blue" 
+                  className="w-full h-11 text-xs font-bold uppercase tracking-widest btn-hover-effect bg-accent-blue mt-4" 
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -230,23 +228,23 @@ export function ContactForm({ className }: ContactFormProps) {
             key="success"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-6"
+            className="text-center py-4"
           >
-            <div className="w-16 h-16 bg-accent-blueLight rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle2 className="w-8 h-8 text-accent-blue" />
+            <div className="w-14 h-14 bg-accent-blueLight rounded-full flex items-center justify-center mx-auto mb-5">
+              <CheckCircle2 className="w-7 h-7 text-accent-blue" />
             </div>
-            <h3 className="text-xl font-bold text-text-primary mb-2">Inquiry Received</h3>
-            <p className="text-text-secondary text-sm mb-8">
+            <h3 className="text-lg font-bold text-text-primary mb-2">Inquiry Received</h3>
+            <p className="text-text-secondary text-xs mb-6">
               A strategic advisor will review your data and respond within 24 hours.
             </p>
 
             {aiAdvice && (
-              <div className="bg-background-page border-l-4 border-accent-blue p-5 text-left rounded-r-lg mb-8 shadow-inner">
-                <div className="flex items-center space-x-2 mb-3 text-accent-blue font-bold text-[10px] uppercase tracking-widest">
+              <div className="bg-background-muted border-l-4 border-accent-blue p-4 text-left rounded-r-lg mb-6">
+                <div className="flex items-center space-x-2 mb-2 text-accent-blue font-bold text-[9px] uppercase tracking-widest">
                   <Sparkles className="w-3 h-3" />
                   <span>AI STRATEGIC INSIGHT</span>
                 </div>
-                <p className="text-text-secondary text-sm leading-relaxed italic">
+                <p className="text-text-secondary text-xs leading-relaxed italic">
                   "{aiAdvice}"
                 </p>
               </div>
@@ -259,7 +257,7 @@ export function ContactForm({ className }: ContactFormProps) {
                 setAiAdvice(null);
                 form.reset();
               }}
-              className="h-11 px-8 text-xs font-bold uppercase tracking-widest"
+              className="h-10 px-6 text-[10px] font-bold uppercase tracking-widest border-accent-border"
             >
               New Inquiry
             </Button>
