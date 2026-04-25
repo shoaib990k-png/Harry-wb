@@ -29,15 +29,15 @@ import { CheckCircle2, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
-  firstName: z.string().min(2, "Minimum 2 characters required"),
-  lastName: z.string().min(2, "Minimum 2 characters required"),
+  firstName: z.string().min(2, "Min 2 chars"),
+  lastName: z.string().min(2, "Min 2 chars"),
   email: z.string().email("Invalid email").refine(
     (email) => !["gmail.com", "yahoo.com", "hotmail.com", "outlook.com"].some(domain => email.endsWith(domain)),
-    { message: "Please use a work email address" }
+    { message: "Use work email" }
   ),
-  organization: z.string().min(1, "Organization name is required"),
-  primaryFocus: z.string().min(1, "Please select your primary focus"),
-  challenge: z.string().min(10, "Please describe your challenge (min 10 characters)"),
+  organization: z.string().min(1, "Org is required"),
+  primaryFocus: z.string().min(1, "Select focus"),
+  challenge: z.string().min(10, "Describe challenge (min 10 chars)"),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -88,9 +88,8 @@ export function ContactForm({ className }: ContactFormProps) {
   }
 
   return (
-    <div className={cn("bg-white p-5 md:p-8 rounded-2xl border border-accent-border shadow-xl text-text-primary", className)}>
-      {/* Progress Bar */}
-      <div className="w-full h-1.5 bg-accent-border rounded-full mb-6 overflow-hidden">
+    <div className={cn("bg-white p-4 sm:p-6 md:p-8 rounded-2xl border border-accent-border shadow-xl text-text-primary w-full", className)}>
+      <div className="w-full h-1 bg-accent-border rounded-full mb-6 overflow-hidden">
         <motion.div 
           className="h-full bg-accent-blue"
           initial={{ width: 0 }}
@@ -109,17 +108,17 @@ export function ContactForm({ className }: ContactFormProps) {
           >
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
                   <FormField
                     control={form.control}
                     name="firstName"
                     render={({ field }) => (
-                      <FormItem className="space-y-1.5">
-                        <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-wider">First Name</FormLabel>
+                      <FormItem className="space-y-1">
+                        <FormLabel className="text-text-primary text-[9px] font-bold uppercase tracking-wider">First Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Jane" {...field} className="h-10 bg-background-muted/50 border-accent-border focus:border-accent-blue text-text-primary" />
+                          <Input placeholder="Jane" {...field} className="h-9 bg-background-muted/30 border-accent-border focus:border-accent-blue text-xs sm:text-sm text-text-primary" />
                         </FormControl>
-                        <FormMessage className="text-[10px]" />
+                        <FormMessage className="text-[9px]" />
                       </FormItem>
                     )}
                   />
@@ -127,12 +126,41 @@ export function ContactForm({ className }: ContactFormProps) {
                     control={form.control}
                     name="lastName"
                     render={({ field }) => (
-                      <FormItem className="space-y-1.5">
-                        <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-wider">Last Name</FormLabel>
+                      <FormItem className="space-y-1">
+                        <FormLabel className="text-text-primary text-[9px] font-bold uppercase tracking-wider">Last Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Doe" {...field} className="h-10 bg-background-muted/50 border-accent-border focus:border-accent-blue text-text-primary" />
+                          <Input placeholder="Doe" {...field} className="h-9 bg-background-muted/30 border-accent-border focus:border-accent-blue text-xs sm:text-sm text-text-primary" />
                         </FormControl>
-                        <FormMessage className="text-[10px]" />
+                        <FormMessage className="text-[9px]" />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem className="space-y-1">
+                        <FormLabel className="text-text-primary text-[9px] font-bold uppercase tracking-wider">Work Email</FormLabel>
+                        <FormControl>
+                          <Input placeholder="jane@company.com" {...field} className="h-9 bg-background-muted/30 border-accent-border focus:border-accent-blue text-xs sm:text-sm text-text-primary" />
+                        </FormControl>
+                        <FormMessage className="text-[9px]" />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="organization"
+                    render={({ field }) => (
+                      <FormItem className="space-y-1">
+                        <FormLabel className="text-text-primary text-[9px] font-bold uppercase tracking-wider">Organization</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Acme Inc." {...field} className="h-9 bg-background-muted/30 border-accent-border focus:border-accent-blue text-xs sm:text-sm text-text-primary" />
+                        </FormControl>
+                        <FormMessage className="text-[9px]" />
                       </FormItem>
                     )}
                   />
@@ -140,41 +168,13 @@ export function ContactForm({ className }: ContactFormProps) {
 
                 <FormField
                   control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem className="space-y-1.5">
-                      <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-wider">Work Email</FormLabel>
-                      <FormControl>
-                        <Input placeholder="jane@company.com" {...field} className="h-10 bg-background-muted/50 border-accent-border focus:border-accent-blue text-text-primary" />
-                      </FormControl>
-                      <FormMessage className="text-[10px]" />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="organization"
-                  render={({ field }) => (
-                    <FormItem className="space-y-1.5">
-                      <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-wider">Organization</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Acme Systems Inc." {...field} className="h-10 bg-background-muted/50 border-accent-border focus:border-accent-blue text-text-primary" />
-                      </FormControl>
-                      <FormMessage className="text-[10px]" />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
                   name="primaryFocus"
                   render={({ field }) => (
-                    <FormItem className="space-y-1.5">
-                      <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-wider">Primary Focus</FormLabel>
+                    <FormItem className="space-y-1">
+                      <FormLabel className="text-text-primary text-[9px] font-bold uppercase tracking-wider">Primary Focus</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger className="h-10 bg-background-muted/50 border-accent-border focus:border-accent-blue text-text-primary">
+                          <SelectTrigger className="h-9 bg-background-muted/30 border-accent-border focus:border-accent-blue text-xs sm:text-sm text-text-primary">
                             <SelectValue placeholder="Select Focus Area" />
                           </SelectTrigger>
                         </FormControl>
@@ -185,7 +185,7 @@ export function ContactForm({ className }: ContactFormProps) {
                           <SelectItem value="Full Stack Integration" className="text-text-primary">Full Stack Integration</SelectItem>
                         </SelectContent>
                       </Select>
-                      <FormMessage className="text-[10px]" />
+                      <FormMessage className="text-[9px]" />
                     </FormItem>
                   )}
                 />
@@ -194,23 +194,23 @@ export function ContactForm({ className }: ContactFormProps) {
                   control={form.control}
                   name="challenge"
                   render={({ field }) => (
-                    <FormItem className="space-y-1.5">
-                      <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-wider">Current Challenge</FormLabel>
+                    <FormItem className="space-y-1">
+                      <FormLabel className="text-text-primary text-[9px] font-bold uppercase tracking-wider">Current Challenge</FormLabel>
                       <FormControl>
                         <Textarea 
-                          placeholder="Describe the bottlenecks you're facing..." 
-                          className="min-h-[80px] bg-background-muted/50 border-accent-border focus:border-accent-blue resize-none text-text-primary" 
+                          placeholder="Describe the bottlenecks..." 
+                          className="min-h-[70px] bg-background-muted/30 border-accent-border focus:border-accent-blue resize-none text-xs sm:text-sm text-text-primary" 
                           {...field} 
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" />
+                      <FormMessage className="text-[9px]" />
                     </FormItem>
                   )}
                 />
 
                 <Button 
                   type="submit" 
-                  className="w-full h-11 text-xs font-bold uppercase tracking-widest btn-hover-effect bg-accent-blue mt-4" 
+                  className="w-full h-10 text-[10px] font-bold uppercase tracking-widest btn-hover-effect bg-accent-blue mt-2" 
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -228,10 +228,10 @@ export function ContactForm({ className }: ContactFormProps) {
             key="success"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-4"
+            className="text-center py-6"
           >
-            <div className="w-14 h-14 bg-accent-blueLight rounded-full flex items-center justify-center mx-auto mb-5">
-              <CheckCircle2 className="w-7 h-7 text-accent-blue" />
+            <div className="w-12 h-12 bg-accent-blueLight rounded-full flex items-center justify-center mx-auto mb-4">
+              <CheckCircle2 className="w-6 h-6 text-accent-blue" />
             </div>
             <h3 className="text-lg font-bold text-text-primary mb-2">Inquiry Received</h3>
             <p className="text-text-secondary text-xs mb-6">
@@ -239,8 +239,8 @@ export function ContactForm({ className }: ContactFormProps) {
             </p>
 
             {aiAdvice && (
-              <div className="bg-background-muted border-l-4 border-accent-blue p-4 text-left rounded-r-lg mb-6">
-                <div className="flex items-center space-x-2 mb-2 text-accent-blue font-bold text-[9px] uppercase tracking-widest">
+              <div className="bg-background-muted border-l-4 border-accent-blue p-4 text-left rounded-r-lg mb-6 shadow-inner">
+                <div className="flex items-center space-x-2 mb-2 text-accent-blue font-bold text-[8px] uppercase tracking-widest">
                   <Sparkles className="w-3 h-3" />
                   <span>AI STRATEGIC INSIGHT</span>
                 </div>
@@ -257,7 +257,7 @@ export function ContactForm({ className }: ContactFormProps) {
                 setAiAdvice(null);
                 form.reset();
               }}
-              className="h-10 px-6 text-[10px] font-bold uppercase tracking-widest border-accent-border"
+              className="h-9 px-6 text-[9px] font-bold uppercase tracking-widest border-accent-border"
             >
               New Inquiry
             </Button>
