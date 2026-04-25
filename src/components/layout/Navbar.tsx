@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
@@ -20,22 +20,21 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   
-  // Pages where the initial (unscrolled) navbar is on a dark hero background
   const isDarkHeroPage = pathname === '/' || pathname === '/contact';
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial scroll position
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const handleScroll = useCallback(() => {
+    const isScrolled = window.scrollY > 15;
+    if (isScrolled !== scrolled) {
+      setScrolled(isScrolled);
+    }
+  }, [scrolled]);
 
-  // Determine text color based on background state
-  // If scrolled, we are on a white background, so text should be dark.
-  // If not scrolled and on a dark hero page, text should be white.
-  // If not scrolled but on a light page, text should be dark.
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
+
   const isTextDark = scrolled || !isDarkHeroPage;
 
   return (
@@ -86,6 +85,7 @@ export function Navbar() {
             isTextDark ? "text-text-primary" : "text-white"
           )}
           onClick={() => setMobileMenuOpen(true)}
+          aria-label="Open menu"
         >
           <Menu className="w-6 h-6" />
         </button>
@@ -106,7 +106,7 @@ export function Navbar() {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
               className="fixed top-0 right-0 bottom-0 w-3/4 max-w-sm bg-white z-[70] shadow-2xl p-6 flex flex-col"
             >
               <div className="flex justify-between items-center mb-10">

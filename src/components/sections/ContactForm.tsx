@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState, useMemo } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '@/components/ui/button';
@@ -50,7 +50,6 @@ export function ContactForm({ className }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [aiAdvice, setAiAdvice] = useState<string | null>(null);
-  const [progress, setProgress] = useState(0);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -64,12 +63,14 @@ export function ContactForm({ className }: ContactFormProps) {
     },
   });
 
-  const watchedValues = form.watch();
-  useEffect(() => {
-    const fields = Object.values(watchedValues);
-    const filledFields = fields.filter(val => val && val.length > 0).length;
-    setProgress((filledFields / fields.length) * 100);
-  }, [watchedValues]);
+  // Performance: Use useWatch for progress instead of watching entire form object
+  const allValues = useWatch({ control: form.control });
+  
+  const progress = useMemo(() => {
+    const totalFields = 6;
+    const filledFields = Object.values(allValues).filter(val => val && val.length > 0).length;
+    return (filledFields / totalFields) * 100;
+  }, [allValues]);
 
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
@@ -92,9 +93,9 @@ export function ContactForm({ className }: ContactFormProps) {
       <div className="w-full h-1 bg-accent-border rounded-full mb-6 overflow-hidden">
         <motion.div 
           className="h-full bg-accent-blue"
-          initial={{ width: 0 }}
+          initial={false}
           animate={{ width: `${progress}%` }}
-          transition={{ type: 'spring', bounce: 0, duration: 0.5 }}
+          transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
         />
       </div>
 
@@ -226,7 +227,7 @@ export function ContactForm({ className }: ContactFormProps) {
         ) : (
           <motion.div
             key="success"
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             className="text-center py-6"
           >

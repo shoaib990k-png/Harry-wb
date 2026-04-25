@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -8,29 +8,30 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
-function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
+// Optimized Counter with smoother increments and memoization
+const Counter = memo(({ value, suffix = "" }: { value: number; suffix?: string }) => {
   const [count, setCount] = useState(0);
+  
   useEffect(() => {
-    let start = 0;
-    const end = value;
+    let startTimestamp: number | null = null;
     const duration = 1500;
-    const increment = end / (duration / 16);
     
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) {
-        setCount(end);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      setCount(Math.floor(progress * value));
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
       }
-    }, 16);
+    };
     
-    return () => clearInterval(timer);
+    window.requestAnimationFrame(step);
   }, [value]);
 
   return <span>{count}{suffix}</span>;
-}
+});
+
+Counter.displayName = 'Counter';
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
@@ -41,27 +42,26 @@ export function Hero() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: prefersReducedMotion ? 0 : 0.1,
+        staggerChildren: prefersReducedMotion ? 0 : 0.05,
         delayChildren: 0.1
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    hidden: { opacity: 0, y: 15 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
   };
 
   return (
-    <section className="relative min-h-[90svh] sm:min-h-svh flex items-center bg-background-hero overflow-hidden py-16 sm:py-20 pt-28 sm:pt-32">
-      {/* Background with overlay */}
+    <section className="relative min-h-[85svh] sm:min-h-svh flex items-center bg-background-hero overflow-hidden py-16 sm:py-20 pt-28 sm:pt-32">
       <div className="absolute inset-0 z-0">
         {heroImage && (
           <Image
             src={heroImage.imageUrl}
             alt="Strategic Background"
             fill
-            className="object-cover opacity-40"
+            className="object-cover opacity-40 pointer-events-none"
             priority
             data-ai-hint="technology network"
           />
@@ -107,7 +107,6 @@ export function Hero() {
             </Button>
           </motion.div>
 
-          {/* Stats Bar */}
           <motion.div 
             variants={itemVariants}
             className="grid grid-cols-3 gap-4 sm:gap-8 border-t border-white/10 pt-8 sm:pt-10 max-w-2xl"
