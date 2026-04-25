@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
@@ -9,9 +8,9 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen pt-20">
+    <main className="min-h-screen">
       <Navbar />
-      <section className="bg-background-hero py-20 lg:py-32 text-white overflow-hidden">
+      <section className="bg-background-hero py-20 pt-32 lg:pt-48 text-white overflow-hidden">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
             <div className="max-w-xl">

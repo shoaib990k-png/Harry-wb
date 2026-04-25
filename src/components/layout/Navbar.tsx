@@ -20,6 +20,7 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   
+  // Pages where the initial (unscrolled) navbar is on a dark hero background
   const isDarkHeroPage = pathname === '/' || pathname === '/contact';
 
   useEffect(() => {
@@ -27,8 +28,15 @@ export function Navbar() {
       setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial scroll position
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Determine text color based on background state
+  // If scrolled, we are on a white background, so text should be dark.
+  // If not scrolled and on a dark hero page, text should be white.
+  // If not scrolled but on a light page, text should be dark.
+  const isTextDark = scrolled || !isDarkHeroPage;
 
   return (
     <nav className={cn(
@@ -42,7 +50,7 @@ export function Navbar() {
           <div className="w-8 h-8 bg-accent-blue rounded flex items-center justify-center text-white font-bold text-lg shrink-0">S</div>
           <span className={cn(
             "font-bold text-lg md:text-xl tracking-tight transition-colors duration-300",
-            (scrolled || !isDarkHeroPage) ? "text-text-primary" : "text-white"
+            isTextDark ? "text-text-primary" : "text-white"
           )}>
             Strategic <span className="text-accent-blue">Architect</span>
           </span>
@@ -56,11 +64,14 @@ export function Navbar() {
               href={link.href}
               className={cn(
                 "relative text-sm font-medium transition-colors hover:text-accent-blue py-1 group",
-                (scrolled || !isDarkHeroPage) ? "text-text-secondary" : "text-white/80"
+                isTextDark ? "text-text-secondary" : "text-white/80"
               )}
             >
               {link.name}
-              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-accent-blue transition-all duration-300 group-hover:w-full group-hover:left-0" />
+              <span className={cn(
+                "absolute bottom-0 left-1/2 w-0 h-0.5 transition-all duration-300 group-hover:w-full group-hover:left-0",
+                isTextDark ? "bg-accent-blue" : "bg-white"
+              )} />
             </Link>
           ))}
           <Button asChild className="btn-hover-effect">
@@ -72,7 +83,7 @@ export function Navbar() {
         <button 
           className={cn(
             "md:hidden p-2 transition-colors", 
-            (scrolled || !isDarkHeroPage) ? "text-text-primary" : "text-white"
+            isTextDark ? "text-text-primary" : "text-white"
           )}
           onClick={() => setMobileMenuOpen(true)}
         >

@@ -8,9 +8,9 @@ import { Award, Shield, Target } from 'lucide-react';
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen pt-20">
+    <main className="min-h-screen">
       <Navbar />
-      <section className="bg-background-muted py-20">
+      <section className="bg-background-muted py-20 pt-32 lg:pt-40">
         <Container>
           <div className="max-w-3xl">
             <SectionLabel>WHO WE ARE</SectionLabel>

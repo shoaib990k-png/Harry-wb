@@ -8,9 +8,11 @@ import { Star, Quote } from 'lucide-react';
 
 export default function BookPage() {
   return (
-    <main className="min-h-screen pt-20">
+    <main className="min-h-screen">
       <Navbar />
-      <BookSection />
+      <div className="pt-20">
+        <BookSection />
+      </div>
       
       <section className="section-padding bg-white border-t border-accent-border">
         <Container>
