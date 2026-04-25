@@ -26,9 +26,9 @@
     },
     {
       "id": "book-cover",
-      "description": "A book on a wooden table matching the user request style",
-      "imageUrl": "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&q=80&w=600&h=800",
-      "imageHint": "book table"
+      "description": "The Quantum Advantage book cover by Joel Kremer",
+      "imageUrl": "https://picsum.photos/seed/88/600/800",
+      "imageHint": "quantum book"
     },
     {
       "id": "founder",

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { SectionLabel } from '@/components/ui/SectionLabel';
@@ -18,9 +19,10 @@ export function FounderSection() {
               {founderImg && (
                 <Image 
                   src={founderImg.imageUrl} 
-                  alt="Founder of Strategic Architect" 
+                  alt="Joel Kremer, Founder of Strategic Architect" 
                   fill 
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  data-ai-hint="professional portrait"
                 />
               )}
             </div>
@@ -30,16 +32,15 @@ export function FounderSection() {
 
           <div>
             <SectionLabel>THE ARCHITECT</SectionLabel>
-            <h2 className="mb-6">Built by <span className="text-accent-blue">Engineering</span> Experience</h2>
+            <h2 className="mb-6">Joel Kremer: <span className="text-accent-blue">Engineering</span> Growth</h2>
             <div className="space-y-6 text-text-secondary leading-relaxed">
               <p>
-                Our founder didn't start in a boardroom. He started in the data centers, 
-                wiring the first generation of high-speed trading architectures.
+                Joel Kremer didn't start in a boardroom. He started in the data centers, 
+                wiring the first generation of high-speed trading architectures and quantum protocols.
               </p>
               <p>
-                After two decades of building systems that refuse to break, he consolidated his 
-                knowledge into Strategic Architect. We combine deep technical expertise with 
-                modern business strategy.
+                As the author of <strong>"The Quantum Advantage"</strong>, Joel has consolidated 
+                two decades of systems engineering into a framework for aggressive market scaling.
               </p>
               <p className="font-code text-sm text-text-primary">
                 "Infrastructure is destiny. If your hardware can't handle your ambition, your strategy doesn't matter."

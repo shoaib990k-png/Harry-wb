@@ -73,9 +73,10 @@ export function BookSection() {
                   >
                     <Image
                       src={bookImage.imageUrl}
-                      alt="Strategic Architect Book Cover"
+                      alt="The Quantum Advantage Book Cover"
                       fill
                       className="object-cover transition-transform duration-500"
+                      data-ai-hint="quantum book"
                     />
                   </motion.div>
                 )}
@@ -109,7 +110,7 @@ export function BookSection() {
                 style={{ translateZ: "40px" }}
                 className="absolute top-6 right-6 bg-accent-blue text-white label-mono px-3 py-1.5 rounded-lg shadow-lg z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0"
               >
-                NEW EDITION
+                BESTSELLER
               </motion.div>
             </motion.div>
           </div>
@@ -122,18 +123,18 @@ export function BookSection() {
             transition={{ duration: 0.6 }}
           >
             <SectionLabel>THE INDUSTRY MANIFESTO</SectionLabel>
-            <h2 className="mb-6">The Blueprint for <span className="text-accent-blue">Modern Logic</span></h2>
+            <h2 className="mb-6">The <span className="text-accent-blue">Quantum</span> Advantage</h2>
             <p className="text-text-secondary mb-8 text-lg leading-relaxed">
-              "Strategic Architect" translates complex low-level engineering into high-level market dominance. 
-              This 280-page manual contains the exact protocols we use to design scalable architectures.
+              "The Quantum Advantage" by Joel Kremer is the definitive guide to mastering early-mover strategies 
+              in the next generation of markets. It bridge the gap between complex logic and market dominance.
             </p>
 
             <div className="space-y-4 mb-10">
               {[
-                "Hardware stack optimization for high-throughput",
-                "Firmware-level networking logic protocols",
-                "Strategic positioning for tech-heavy products",
-                "Case studies from 9-figure scaling projects"
+                "Quantum-era infrastructure optimization",
+                "Strategic logic for first-mover advantage",
+                "Joel Kremer's proprietary scaling protocols",
+                "Navigating the intersection of tech and growth"
               ].map((item, i) => (
                 <div key={i} className="flex items-start space-x-3">
                   <CheckCircle2 className="w-5 h-5 text-accent-blue shrink-0 mt-0.5" />
@@ -144,7 +145,7 @@ export function BookSection() {
 
             <div className="flex flex-wrap items-center gap-6">
               <Button asChild size="lg" className="h-14 px-8 btn-hover-effect bg-accent-blue">
-                <Link href="/the-book">Order My Copy</Link>
+                <Link href="/the-book">Get The Book</Link>
               </Button>
               <div className="flex items-center space-x-2">
                 <div className="flex -space-x-2">
@@ -163,7 +164,7 @@ export function BookSection() {
                   <div className="flex text-amber-500 mb-0.5">
                     {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 fill-current" />)}
                   </div>
-                  <p className="text-text-muted">Trusted by 12,000+ engineers</p>
+                  <p className="text-text-muted">Over 15,000 copies sold</p>
                 </div>
               </div>
             </div>
