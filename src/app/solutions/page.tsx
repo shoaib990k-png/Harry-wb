@@ -1,3 +1,4 @@
+
 "use client";
 
 import React from 'react';
@@ -27,9 +28,11 @@ export default function SolutionsPage() {
         </Container>
       </section>
 
-      <Solutions />
+      <div id="overview">
+        <Solutions />
+      </div>
 
-      {/* New Section: Tactical Process */}
+      {/* Tactical Process */}
       <section className="section-padding bg-background-hero text-white overflow-hidden">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -100,7 +103,7 @@ export default function SolutionsPage() {
         </Container>
       </section>
 
-      <section className="section-padding bg-background-page">
+      <section className="section-padding bg-background-page" id="specifications">
         <Container>
           <div className="text-center mb-16">
             <SectionLabel className="mx-auto">TECHNICAL SPECIFICATIONS</SectionLabel>
@@ -115,7 +118,7 @@ export default function SolutionsPage() {
             </TabsList>
             
             <div className="mt-8 bg-white p-8 md:p-12 rounded-2xl border border-accent-border shadow-sm">
-              <TabsContent value="hardware" className="mt-0">
+              <TabsContent value="hardware" className="mt-0" id="hardware">
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="p-3 bg-accent-blueLight rounded-lg">
                     <Cpu className="w-6 h-6 text-accent-blue" />
@@ -141,7 +144,7 @@ export default function SolutionsPage() {
                 </div>
               </TabsContent>
 
-              <TabsContent value="protocols" className="mt-0">
+              <TabsContent value="protocols" className="mt-0" id="protocols">
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="p-3 bg-accent-blueLight rounded-lg">
                     <Network className="w-6 h-6 text-accent-blue" />
@@ -167,7 +170,7 @@ export default function SolutionsPage() {
                 </div>
               </TabsContent>
 
-              <TabsContent value="strategy" className="mt-0">
+              <TabsContent value="strategy" className="mt-0" id="strategy">
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="p-3 bg-accent-blueLight rounded-lg">
                     <BarChart3 className="w-6 h-6 text-accent-blue" />
