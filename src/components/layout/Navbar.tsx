@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
@@ -20,6 +21,7 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   
+  // Define pages that have a dark hero background
   const isDarkHeroPage = pathname === '/' || pathname === '/contact';
 
   const handleScroll = useCallback(() => {
@@ -35,6 +37,8 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
+  // Logic: Text is dark if we have scrolled OR we are on a light-background page.
+  // Exception: On dark hero pages, if NOT scrolled, text must be white.
   const isTextDark = scrolled || !isDarkHeroPage;
 
   return (
@@ -46,7 +50,7 @@ export function Navbar() {
     )}>
       <Container className="flex items-center justify-between">
         <Link href="/" className="group flex items-center space-x-2">
-          <div className="w-8 h-8 bg-accent-blue rounded flex items-center justify-center text-white font-bold text-lg shrink-0">S</div>
+          <div className="w-8 h-8 bg-accent-blue rounded flex items-center justify-center text-white font-bold text-lg shrink-0 shadow-sm">S</div>
           <span className={cn(
             "font-bold text-lg md:text-xl tracking-tight transition-colors duration-300",
             isTextDark ? "text-text-primary" : "text-white"
@@ -73,7 +77,10 @@ export function Navbar() {
               )} />
             </Link>
           ))}
-          <Button asChild className="btn-hover-effect">
+          <Button asChild className={cn(
+            "btn-hover-effect font-bold tracking-wider text-xs px-6",
+            !scrolled && isDarkHeroPage ? "bg-white text-accent-blue hover:bg-white/90 border-none" : "bg-accent-blue text-white"
+          )}>
             <Link href="/contact">Get Started</Link>
           </Button>
         </div>
@@ -126,7 +133,7 @@ export function Navbar() {
                     {link.name}
                   </Link>
                 ))}
-                <Button asChild className="w-full mt-4" onClick={() => setMobileMenuOpen(false)}>
+                <Button asChild className="w-full mt-4 h-12 bg-accent-blue text-white" onClick={() => setMobileMenuOpen(false)}>
                   <Link href="/contact">Get Started</Link>
                 </Button>
               </div>

@@ -26,9 +26,9 @@
     },
     {
       "id": "book-cover",
-      "description": "The Quantum Advantage book cover by Joel Kremer",
-      "imageUrl": "https://picsum.photos/seed/book88/600/800",
-      "imageHint": "quantum book"
+      "description": "The Quantum Advantage book cover featuring Joel Kremer",
+      "imageUrl": "https://picsum.photos/seed/quantum-advantage/600/800",
+      "imageHint": "business technology"
     },
     {
       "id": "founder",
