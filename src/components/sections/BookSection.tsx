@@ -110,7 +110,7 @@ export function BookSection() {
                 style={{ translateZ: "40px" }}
                 className="absolute top-6 right-6 bg-accent-blue text-white label-mono px-3 py-1.5 rounded-lg shadow-lg z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0"
               >
-                BESTSELLER
+                NEW RELEASE
               </motion.div>
             </motion.div>
           </div>
@@ -122,19 +122,22 @@ export function BookSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <SectionLabel>THE INDUSTRY MANIFESTO</SectionLabel>
-            <h2 className="mb-6">The <span className="text-accent-blue">Quantum</span> Advantage</h2>
-            <p className="text-text-secondary mb-8 text-lg leading-relaxed">
-              "The Quantum Advantage" by Joel Kremer is the definitive guide to mastering early-mover strategies 
-              in the next generation of markets. It bridge the gap between complex logic and market dominance.
+            <SectionLabel>THE STRATEGIC MANIFESTO</SectionLabel>
+            <h2 className="mb-4">The <span className="text-accent-blue">Quantum</span> Advantage</h2>
+            <p className="text-accent-blue font-bold text-lg mb-6 leading-tight">
+              Why Early Movers Will Own Tomorrow's Markets
+            </p>
+            <p className="text-text-secondary mb-8 text-md leading-relaxed">
+              In his latest work, Joel Kremer breaks down the complex intersection of high-speed hardware 
+              and aggressive market strategy. This is the blueprint for the next generation of global industry leaders.
             </p>
 
             <div className="space-y-4 mb-10">
               {[
-                "Quantum-era infrastructure optimization",
-                "Strategic logic for first-mover advantage",
-                "Joel Kremer's proprietary scaling protocols",
-                "Navigating the intersection of tech and growth"
+                "Mastering early-mover market advantage",
+                "Infrastructure optimization for scaling",
+                "The logic of first-strike strategy",
+                "Building resilient technical guardrails"
               ].map((item, i) => (
                 <div key={i} className="flex items-start space-x-3">
                   <CheckCircle2 className="w-5 h-5 text-accent-blue shrink-0 mt-0.5" />
@@ -145,7 +148,7 @@ export function BookSection() {
 
             <div className="flex flex-wrap items-center gap-6">
               <Button asChild size="lg" className="h-14 px-8 btn-hover-effect bg-accent-blue">
-                <Link href="/the-book">Get The Book</Link>
+                <Link href="/contact">Order Your Copy</Link>
               </Button>
               <div className="flex items-center space-x-2">
                 <div className="flex -space-x-2">
@@ -164,7 +167,7 @@ export function BookSection() {
                   <div className="flex text-amber-500 mb-0.5">
                     {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 fill-current" />)}
                   </div>
-                  <p className="text-text-muted">Over 15,000 copies sold</p>
+                  <p className="text-text-muted">Join 15,000+ industry leaders</p>
                 </div>
               </div>
             </div>

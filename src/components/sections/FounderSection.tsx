@@ -35,15 +35,15 @@ export function FounderSection() {
             <h2 className="mb-6">Joel Kremer: <span className="text-accent-blue">Engineering</span> Growth</h2>
             <div className="space-y-6 text-text-secondary leading-relaxed">
               <p>
-                Joel Kremer didn't start in a boardroom. He started in the data centers, 
-                wiring the first generation of high-speed trading architectures and quantum protocols.
+                Joel Kremer is the driving force behind Strategic Architect. He started his career in the trenches of 
+                high-frequency trading data centers, wiring the first generation of low-latency quantum protocols.
               </p>
               <p>
                 As the author of <strong>"The Quantum Advantage"</strong>, Joel has consolidated 
-                two decades of systems engineering into a framework for aggressive market scaling.
+                two decades of systems engineering into a framework for why early movers will own tomorrow's markets.
               </p>
-              <p className="font-code text-sm text-text-primary">
-                "Infrastructure is destiny. If your hardware can't handle your ambition, your strategy doesn't matter."
+              <p className="font-code text-sm text-text-primary italic">
+                "Infrastructure is destiny. If your hardware can't handle your ambition, your strategy will always be limited."
               </p>
             </div>
             
