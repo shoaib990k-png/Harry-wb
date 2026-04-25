@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
@@ -17,10 +18,14 @@ const navLinks = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  
+  // Pages that have a dark hero section where white text is appropriate initially
+  const isDarkHeroPage = pathname === '/' || pathname === '/contact';
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 80);
+      setScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -38,7 +43,7 @@ export function Navbar() {
           <div className="w-8 h-8 bg-accent-blue rounded flex items-center justify-center text-white font-bold text-lg">S</div>
           <span className={cn(
             "font-bold text-xl tracking-tight transition-colors",
-            scrolled ? "text-text-primary" : "text-white"
+            scrolled || !isDarkHeroPage ? "text-text-primary" : "text-white"
           )}>
             Strategic <span className="text-accent-blue">Architect</span>
           </span>
@@ -52,7 +57,7 @@ export function Navbar() {
               href={link.href}
               className={cn(
                 "relative text-sm font-medium transition-colors hover:text-accent-blue py-1 group",
-                scrolled ? "text-text-secondary" : "text-white/80"
+                scrolled || !isDarkHeroPage ? "text-text-secondary" : "text-white/80"
               )}
             >
               {link.name}
@@ -66,7 +71,10 @@ export function Navbar() {
 
         {/* Mobile Toggle */}
         <button 
-          className={cn("md:hidden p-2 transition-colors", scrolled ? "text-text-primary" : "text-white")}
+          className={cn(
+            "md:hidden p-2 transition-colors", 
+            scrolled || !isDarkHeroPage ? "text-text-primary" : "text-white"
+          )}
           onClick={() => setMobileMenuOpen(true)}
         >
           <Menu className="w-6 h-6" />

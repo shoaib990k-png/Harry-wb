@@ -7,7 +7,7 @@ import { Container } from '@/components/ui/Container';
 import { SectionLabel } from '@/components/ui/SectionLabel';
 import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Cpu, Network, BarChart3, CheckCircle2 } from 'lucide-react';
+import { Cpu, Network, BarChart3, CheckCircle2, Zap, Shield, Search } from 'lucide-react';
 import { Solutions } from '@/components/sections/Solutions';
 
 export default function SolutionsPage() {
@@ -28,6 +28,77 @@ export default function SolutionsPage() {
       </section>
 
       <Solutions />
+
+      {/* New Section: Tactical Process */}
+      <section className="section-padding bg-background-hero text-white overflow-hidden">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <SectionLabel className="text-accent-blue">OUR METHODOLOGY</SectionLabel>
+              <h2 className="text-white mb-8">The Tactical <span className="text-accent-blue">Execution</span> Process</h2>
+              <div className="space-y-12">
+                {[
+                  {
+                    icon: <Search className="w-6 h-6" />,
+                    title: "01. Logic Audit",
+                    desc: "We analyze your current stack for performance leaks and protocol inefficiencies."
+                  },
+                  {
+                    icon: <Zap className="w-6 h-6" />,
+                    title: "02. Infrastructure Deployment",
+                    desc: "Custom hardware is provisioned and deployed across our global edge network."
+                  },
+                  {
+                    icon: <Shield className="w-6 h-6" />,
+                    title: "03. Strategic Guardrails",
+                    desc: "We implement logic protocols that ensure stability during aggressive scaling phases."
+                  }
+                ].map((step, i) => (
+                  <div key={i} className="flex gap-6">
+                    <div className="w-12 h-12 rounded-xl bg-accent-blue flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(43,108,176,0.4)]">
+                      {step.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-white text-xl font-bold mb-2">{step.title}</h3>
+                      <p className="text-white/60 text-sm leading-relaxed">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="relative">
+              <div className="absolute -inset-10 bg-accent-blue/10 blur-[120px] rounded-full" />
+              <div className="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-sm">
+                <div className="flex items-center justify-between mb-8">
+                  <span className="label-mono text-accent-blue">REAL-TIME TELEMETRY</span>
+                  <div className="flex gap-2">
+                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                    <div className="w-2 h-2 rounded-full bg-accent-blue" />
+                  </div>
+                </div>
+                <div className="space-y-6">
+                  {[75, 92, 45, 88].map((val, i) => (
+                    <div key={i} className="space-y-2">
+                      <div className="flex justify-between text-xs label-mono text-white/40">
+                        <span>NODE_ARCH_{i+1}</span>
+                        <span>{val}%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${val}%` }}
+                          transition={{ duration: 1, delay: i * 0.2 }}
+                          className="h-full bg-accent-blue"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
 
       <section className="section-padding bg-background-page">
         <Container>
