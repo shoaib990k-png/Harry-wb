@@ -3,13 +3,13 @@
 
 import React, { useState } from 'react';
 import { Container } from '@/components/ui/Container';
-import { SectionLabel } from '@/components/ui/SectionLabel';
 import { Button } from '@/components/ui/button';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Star, CheckCircle2, Sparkles } from 'lucide-react';
+import { Download, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { Pill } from '@/components/ui/Pill';
 
 export function BookSection() {
   const [isHovered, setIsHovered] = useState(false);
@@ -48,11 +48,15 @@ export function BookSection() {
   };
 
   return (
-    <section className="section-padding bg-background-muted overflow-hidden">
+    <section className="section-padding bg-[#0F1624] overflow-hidden text-white relative">
+      {/* Background radial glow */}
+      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-blue/10 blur-[120px] rounded-full pointer-events-none" />
+
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-32 items-center">
+          
           {/* 3D Interactive Book Showcase */}
-          <div className="flex justify-center perspective-[2000px] py-10">
+          <div className="flex justify-center items-center perspective-[2000px] py-10 relative">
             <motion.div
               onMouseEnter={handleMouseEnter}
               onMouseMove={handleMouseMove}
@@ -62,33 +66,33 @@ export function BookSection() {
                 rotateY,
                 transformStyle: "preserve-3d",
               }}
-              className="relative w-full max-w-[340px] aspect-[1/1.4] cursor-pointer group"
+              className="relative w-full max-w-[340px] aspect-[1/1.4] cursor-pointer group z-10"
             >
               {/* Stacked Pages Effect (Thickness) */}
               <div 
-                className="absolute inset-0 bg-white rounded-r-lg border-y border-r border-accent-border/50" 
+                className="absolute inset-0 bg-white rounded-r-lg border-y border-r border-white/10" 
                 style={{ transform: "translateZ(-2px)" }}
               />
-              {[...Array(12)].map((_, i) => (
+              {[...Array(15)].map((_, i) => (
                 <div 
                   key={i}
-                  className="absolute inset-0 bg-white rounded-r-lg border-r border-accent-border/10 shadow-sm"
-                  style={{ transform: `translateZ(-${(i + 1) * 2}px) translateX(${i * 0.15}px)` }}
+                  className="absolute inset-0 bg-white rounded-r-lg border-r border-black/5 shadow-sm"
+                  style={{ transform: `translateZ(-${(i + 1) * 2}px) translateX(${i * 0.1}px)` }}
                 />
               ))}
               
               {/* Back Cover */}
               <div 
-                className="absolute inset-0 bg-[#0F1624] rounded-lg shadow-2xl" 
-                style={{ transform: "translateZ(-26px)" }}
+                className="absolute inset-0 bg-slate-900 rounded-lg shadow-2xl" 
+                style={{ transform: "translateZ(-32px)" }}
               />
 
               {/* Main Book Visual Container */}
               <div 
-                className="absolute inset-0 z-10 overflow-hidden rounded-lg shadow-[30px_30px_70px_rgba(0,0,0,0.5)] border border-white/10"
+                className="absolute inset-0 z-10 overflow-hidden rounded-lg shadow-[50px_50px_100px_rgba(0,0,0,0.8)] border border-white/10"
                 style={{ transform: "translateZ(0px)" }}
               >
-                {/* Front Image (Image 1) */}
+                {/* Front Image */}
                 <motion.div 
                   className="absolute inset-0"
                   animate={{ opacity: isHovered ? 0 : 1 }}
@@ -96,15 +100,14 @@ export function BookSection() {
                 >
                   <Image
                     src={frontImage}
-                    alt="The Quantum Advantage - Front View"
+                    alt="The Quantum Advantage"
                     fill
                     className="object-cover"
                     priority
-                    data-ai-hint="business book"
                   />
                 </motion.div>
 
-                {/* Hover Image (Image 2 - Angled/Other View) */}
+                {/* Hover Image */}
                 <motion.div 
                   className="absolute inset-0"
                   initial={{ opacity: 0 }}
@@ -113,93 +116,91 @@ export function BookSection() {
                 >
                   <Image
                     src={hoverImage}
-                    alt="The Quantum Advantage - Detail View"
+                    alt="The Quantum Advantage Detail"
                     fill
                     className="object-cover"
-                    data-ai-hint="book mockup"
                   />
-                  {/* Overlay for cinematic feel on hover */}
                   <div className="absolute inset-0 bg-accent-blue/10 mix-blend-overlay" />
                 </motion.div>
                 
-                {/* Dynamic Parallax Shine / Lighting */}
+                {/* Dynamic Lighting Shine */}
                 <motion.div 
                   style={{ 
                     x: glowX, 
                     y: glowY,
-                    background: "radial-gradient(circle at center, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%)"
+                    background: "radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%)"
                   }}
                   className="absolute -inset-full pointer-events-none mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 />
               </div>
+            </motion.div>
 
-              {/* Floating Best Seller Badge */}
-              <motion.div 
-                style={{ translateZ: "40px" }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="absolute -top-6 -right-6 bg-accent-blue text-white label-mono px-5 py-2.5 rounded-xl shadow-[0_10px_30px_rgba(43,108,176,0.4)] z-20 font-bold flex items-center gap-2"
-              >
-                <Sparkles className="w-4 h-4" />
-                #01 BESTSELLER
-              </motion.div>
+            {/* Research Distilled Badge */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 z-20 flex-col items-center justify-center w-24 h-32 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl"
+            >
+              <div className="text-accent-blue font-bold text-xl">2.5yr</div>
+              <div className="text-[8px] label-mono text-white/50 text-center px-2 mt-1">RESEARCH DISTILLED</div>
             </motion.div>
           </div>
 
           {/* Content Section */}
           <div className="max-w-xl">
-            <SectionLabel>THE STRATEGIC MANIFESTO</SectionLabel>
-            <h2 className="mb-4 leading-tight">The <span className="text-accent-blue">Quantum</span> Advantage</h2>
-            <p className="text-accent-blue font-bold text-lg mb-6 tracking-tight">
-              Why Early Movers Will Own Tomorrow's Markets
-            </p>
-            <p className="text-text-secondary mb-8 text-base leading-relaxed">
-              In his latest work, <strong>Joel Kremer</strong> breaks down the complex intersection of high-speed 
-              hardware and aggressive market strategy. This is the definitive blueprint for the next 
-              generation of global industry leaders who refuse to follow.
+            <div className="flex items-center space-x-3 mb-6">
+              <div className="w-8 h-[1px] bg-amber-500" />
+              <span className="label-mono text-amber-500 tracking-[0.2em] text-[10px]">THE DEFINITIVE GUIDE</span>
+            </div>
+            
+            <h2 className="text-white text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+              2.5 Years of <span className="text-accent-blue italic">Quantum Research</span>—Distilled.
+            </h2>
+            
+            <p className="text-white/60 text-base mb-10 leading-relaxed font-light">
+              Written for C-suite executives and infrastructure architects, this definitive guide navigates 
+              the shift from classical sensing to quantum-grade security.
             </p>
 
-            <div className="space-y-4 mb-10">
-              {[
-                "Mastering early-mover market advantage",
-                "Infrastructure optimization for extreme scaling",
-                "The logic of first-strike technical strategy",
-                "Building resilient technical guardrails"
-              ].map((item, i) => (
-                <div key={i} className="flex items-start space-x-3 group">
-                  <div className="mt-1">
-                    <CheckCircle2 className="w-5 h-5 text-accent-blue transition-transform group-hover:scale-110" />
-                  </div>
-                  <span className="text-text-secondary text-sm group-hover:text-text-primary transition-colors">{item}</span>
-                </div>
+            <div className="flex flex-wrap gap-3 mb-12">
+              {["QUANTUM STRATEGY", "ENTERPRISE ROI", "SECURE COMMS", "R&D FRAMEWORKS"].map((tag) => (
+                <Pill key={tag} className="bg-white/5 border-white/10 text-white/70 px-4 py-2 hover:bg-white/10 transition-colors">
+                  {tag}
+                </Pill>
               ))}
             </div>
 
-            <div className="flex flex-wrap items-center gap-8">
-              <Button asChild size="lg" className="h-14 px-10 btn-hover-effect bg-accent-blue text-[10px] uppercase tracking-widest font-bold shadow-xl">
-                <Link href="/contact">Order Hardcover</Link>
+            <div className="flex flex-wrap items-center gap-6">
+              <Button asChild size="lg" className="h-14 px-10 bg-amber-500 hover:bg-amber-600 text-black font-bold uppercase tracking-widest text-[10px] rounded-xl shadow-[0_10px_30px_rgba(245,158,11,0.2)]">
+                <Link href="/contact">Get Your Copy →</Link>
               </Button>
-              <div className="flex items-center space-x-4">
-                <div className="flex -space-x-3">
-                  {[51, 52, 53, 54].map((seed) => (
-                    <div key={seed} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-accent-border relative shadow-lg">
-                      <Image 
-                        src={`https://picsum.photos/seed/${seed}/64/64`} 
-                        alt="Reader" 
-                        fill 
-                        className="object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
-                <div className="text-[10px] leading-tight">
-                  <div className="flex text-amber-500 mb-1">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 fill-current" />)}
+              
+              <Button asChild variant="outline" size="lg" className="h-14 px-8 border-white/10 text-white hover:bg-white/5 rounded-xl">
+                <Link href="#" className="flex items-center gap-2 text-[10px] uppercase font-bold tracking-widest">
+                  <Download className="w-4 h-4" />
+                  Free Chapter Preview
+                </Link>
+              </Button>
+            </div>
+
+            {/* Trust Element */}
+            <div className="mt-12 flex items-center space-x-4">
+              <div className="flex -space-x-3">
+                {[60, 61, 62].map((seed) => (
+                  <div key={seed} className="w-8 h-8 rounded-full border-2 border-[#0F1624] overflow-hidden bg-white/10 relative">
+                    <Image 
+                      src={`https://picsum.photos/seed/${seed}/64/64`} 
+                      alt="Leader" 
+                      fill 
+                      className="object-cover"
+                    />
                   </div>
-                  <p className="text-text-muted font-bold">15,000+ copies sold</p>
-                </div>
+                ))}
               </div>
+              <p className="text-[9px] font-bold label-mono text-white/40 tracking-wider">
+                JOINED BY <span className="text-white/80">5,000+</span> INDUSTRY LEADERS GLOBALLY.
+              </p>
             </div>
           </div>
         </div>
