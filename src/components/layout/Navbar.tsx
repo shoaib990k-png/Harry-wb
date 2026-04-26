@@ -1,7 +1,6 @@
-
 "use client";
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
@@ -20,15 +19,19 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const lastScrollY = useRef(0);
   
-  // Define pages that have a dark hero background
   const isDarkHeroPage = pathname === '/' || pathname === '/contact';
 
   const handleScroll = useCallback(() => {
-    const isScrolled = window.scrollY > 15;
+    const currentScrollY = window.scrollY;
+    if (Math.abs(currentScrollY - lastScrollY.current) < 5) return;
+    
+    const isScrolled = currentScrollY > 20;
     if (isScrolled !== scrolled) {
       setScrolled(isScrolled);
     }
+    lastScrollY.current = currentScrollY;
   }, [scrolled]);
 
   useEffect(() => {
@@ -37,13 +40,11 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
-  // Logic: Text is dark if we have scrolled OR we are on a light-background page.
-  // Exception: On dark hero pages, if NOT scrolled, text must be white.
   const isTextDark = scrolled || !isDarkHeroPage;
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 flex items-center",
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 flex items-center will-change-transform",
       scrolled 
         ? "bg-white/95 backdrop-blur-md border-b border-accent-border shadow-sm h-16" 
         : "bg-transparent h-20"
@@ -59,7 +60,6 @@ export function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop Links */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
             <Link 
@@ -85,7 +85,6 @@ export function Navbar() {
           </Button>
         </div>
 
-        {/* Mobile Toggle */}
         <button 
           className={cn(
             "md:hidden p-2 transition-colors", 
@@ -98,7 +97,6 @@ export function Navbar() {
         </button>
       </Container>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>

@@ -3,43 +3,43 @@
     {
       "id": "hero-bg",
       "description": "Abstract technology network background",
-      "imageUrl": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1920&h=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1400",
       "imageHint": "technology network"
     },
     {
       "id": "hardware",
       "description": "Server hardware and chip set",
-      "imageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800&h=600",
+      "imageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
       "imageHint": "server hardware"
     },
     {
       "id": "protocols",
       "description": "Digital encryption and networking protocols",
-      "imageUrl": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800&h=600",
+      "imageUrl": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800",
       "imageHint": "cyber security"
     },
     {
       "id": "strategy",
       "description": "Strategic business planning meeting",
-      "imageUrl": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800&h=600",
+      "imageUrl": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
       "imageHint": "business strategy"
     },
     {
       "id": "book-front",
       "description": "The Quantum Advantage - Front Cover",
-      "imageUrl": "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=600&h=800",
+      "imageUrl": "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=600",
       "imageHint": "business book"
     },
     {
       "id": "book-hover",
       "description": "The Quantum Advantage - Angled Mockup",
-      "imageUrl": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600&h=800",
+      "imageUrl": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600",
       "imageHint": "hardcover mockup"
     },
     {
       "id": "founder",
       "description": "Professional corporate portrait of Joel Kremer",
-      "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600&h=800",
+      "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600",
       "imageHint": "professional portrait"
     }
   ]

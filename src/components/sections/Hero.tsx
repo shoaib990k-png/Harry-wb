@@ -8,7 +8,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
-// Optimized Counter with smoother increments and memoization
 const Counter = memo(({ value, suffix = "" }: { value: number; suffix?: string }) => {
   const [count, setCount] = useState(0);
   
@@ -25,7 +24,8 @@ const Counter = memo(({ value, suffix = "" }: { value: number; suffix?: string }
       }
     };
     
-    window.requestAnimationFrame(step);
+    const animationFrame = window.requestAnimationFrame(step);
+    return () => window.cancelAnimationFrame(animationFrame);
   }, [value]);
 
   return <span>{count}{suffix}</span>;
@@ -55,15 +55,16 @@ export function Hero() {
 
   return (
     <section className="relative min-h-[85svh] sm:min-h-svh flex items-center bg-background-hero overflow-hidden py-16 sm:py-20 pt-28 sm:pt-32">
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         {heroImage && (
           <Image
             src={heroImage.imageUrl}
             alt="Strategic Background"
             fill
-            className="object-cover opacity-40 pointer-events-none"
+            className="object-cover opacity-40"
             priority
-            data-ai-hint="technology network"
+            sizes="100vw"
+            quality={75}
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-b from-background-hero/70 via-background-hero/90 to-background-hero" />
