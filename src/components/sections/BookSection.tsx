@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useCallback } from 'react';
@@ -19,11 +20,12 @@ export function BookSection() {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const mouseXSpring = useSpring(x, { stiffness: 100, damping: 25 });
-  const mouseYSpring = useSpring(y, { stiffness: 100, damping: 25 });
+  // High performance spring settings for reduced lag
+  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 30 });
+  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 30 });
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -52,18 +54,18 @@ export function BookSection() {
                 rotateY,
                 transformStyle: "preserve-3d",
               }}
-              className="relative w-full max-w-[320px] aspect-[1/1.4] cursor-pointer group z-10 will-change-transform"
+              className="relative w-full max-w-[320px] aspect-[1/1.4] cursor-pointer group z-10 will-change-transform transform-gpu"
             >
               <div className="absolute -top-4 -right-8 z-30 bg-accent-blue text-white px-4 py-2 rounded-lg text-[10px] font-bold shadow-lg flex items-center gap-2 pointer-events-none">
                 <span className="w-2 h-2 bg-white/40 rounded-full animate-pulse" />
                 #01 BESTSELLER
               </div>
 
-              <div className="absolute inset-0 z-10 overflow-hidden rounded-lg shadow-2xl border border-accent-border bg-white transform-gpu">
+              <div className="absolute inset-0 z-10 overflow-hidden rounded-lg shadow-2xl border border-accent-border bg-white">
                 <motion.div 
-                  className="absolute inset-0"
+                  className="absolute inset-0 will-change-opacity"
                   animate={{ opacity: isHovered ? 0 : 1 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.25 }}
                 >
                   <Image
                     src={frontImage}
@@ -76,10 +78,10 @@ export function BookSection() {
                 </motion.div>
 
                 <motion.div 
-                  className="absolute inset-0"
+                  className="absolute inset-0 will-change-opacity"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: isHovered ? 1 : 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.25 }}
                 >
                   <Image
                     src={hoverImage}
@@ -129,7 +131,7 @@ export function BookSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <Button asChild size="lg" className="bg-accent-blue hover:bg-accent-navy text-white px-8 h-14 uppercase font-bold tracking-widest text-xs rounded-xl shadow-lg">
+              <Button asChild size="lg" className="bg-accent-blue hover:bg-accent-navy text-white px-8 h-14 uppercase font-bold tracking-widest text-xs rounded-xl shadow-lg btn-hover-effect">
                 <Link href="/contact">Order Hardcover</Link>
               </Button>
               

@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
@@ -19,26 +20,31 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
   
   const isDarkHeroPage = pathname === '/' || pathname === '/contact';
 
   const handleScroll = useCallback(() => {
-    const currentScrollY = window.scrollY;
-    if (Math.abs(currentScrollY - lastScrollY.current) < 5) return;
-    
-    const isScrolled = currentScrollY > 20;
-    if (isScrolled !== scrolled) {
-      setScrolled(isScrolled);
+    if (!ticking.current) {
+      window.requestAnimationFrame(() => {
+        const isScrolled = window.scrollY > 20;
+        if (isScrolled !== scrolled) {
+          setScrolled(isScrolled);
+        }
+        ticking.current = false;
+      });
+      ticking.current = true;
     }
-    lastScrollY.current = currentScrollY;
   }, [scrolled]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    // Initial check
+    const initialScrolled = window.scrollY > 20;
+    if (initialScrolled !== scrolled) setScrolled(initialScrolled);
+    
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
+  }, [handleScroll, scrolled]);
 
   const isTextDark = scrolled || !isDarkHeroPage;
 
