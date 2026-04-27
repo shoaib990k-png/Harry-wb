@@ -73,12 +73,12 @@ export function ContactForm({ className }: ContactFormProps) {
   const allValues = useWatch({ control: form.control });
   
   const progress = useMemo(() => {
-    const totalFields = 5; // excluding challenge
+    const totalFields = 5;
     const filledFields = [
       allValues.firstName, allValues.lastName, allValues.email, 
       allValues.organization, allValues.primaryFocus
     ].filter(val => val && val.length > 0).length;
-    return Math.round((filledFields / totalFields) * 100 * 0.33); // Normalizing to 33% like the request
+    return Math.min(Math.round((filledFields / totalFields) * 33) + 33, 100);
   }, [allValues]);
 
   async function onSubmit(values: FormValues) {
@@ -98,23 +98,24 @@ export function ContactForm({ className }: ContactFormProps) {
   }
 
   return (
-    <div className={cn("grid grid-cols-1 lg:grid-cols-5 gap-8 bg-white p-6 md:p-12 rounded-2xl border border-accent-border shadow-2xl", className)}>
-      <div className="lg:col-span-2 space-y-8">
+    <div className={cn("grid grid-cols-1 lg:grid-cols-5 gap-8 bg-white p-6 md:p-10 lg:p-12 rounded-2xl border border-accent-border shadow-2xl text-text-primary", className)}>
+      <div className="lg:col-span-2 space-y-6 md:space-y-8">
         <div className="space-y-2">
-          <p className="label-mono text-accent-blue text-xs font-bold">STRATEGIC ALIGNMENT {progress}%</p>
-          <div className="w-full h-1 bg-accent-border rounded-full overflow-hidden">
+          <p className="label-mono text-accent-blue text-[10px] md:text-xs font-bold uppercase tracking-widest">STRATEGIC ALIGNMENT {progress}%</p>
+          <div className="w-full h-1.5 bg-accent-border rounded-full overflow-hidden">
             <motion.div 
               className="h-full bg-accent-blue"
-              initial={{ width: 0 }}
+              initial={{ width: "33%" }}
               animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.5 }}
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5 md:gap-6">
           {features.map((f, i) => (
             <div key={i} className="flex items-start gap-4 group">
-              <div className="w-10 h-10 rounded-xl bg-accent-blueLight flex items-center justify-center text-accent-blue group-hover:bg-accent-blue group-hover:text-white transition-colors duration-300">
+              <div className="w-10 h-10 rounded-xl bg-accent-blueLight flex items-center justify-center text-accent-blue group-hover:bg-accent-blue group-hover:text-white transition-colors duration-300 shrink-0">
                 {f.icon}
               </div>
               <div>
@@ -126,7 +127,7 @@ export function ContactForm({ className }: ContactFormProps) {
         </div>
       </div>
 
-      <div className="lg:col-span-3 border-l border-accent-border pl-0 lg:pl-12">
+      <div className="lg:col-span-3 lg:border-l border-accent-border lg:pl-12 pt-6 lg:pt-0">
         <AnimatePresence mode="wait">
           {!success ? (
             <motion.div
@@ -136,8 +137,8 @@ export function ContactForm({ className }: ContactFormProps) {
               exit={{ opacity: 0 }}
             >
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5 md:space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
                       name="firstName"
@@ -145,7 +146,7 @@ export function ContactForm({ className }: ContactFormProps) {
                         <FormItem className="space-y-1">
                           <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-widest">First Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="John" {...field} className="bg-background-muted/30 h-11" />
+                            <Input placeholder="John" {...field} className="bg-background-muted/40 h-11 text-text-primary border-accent-border focus:ring-accent-blue" />
                           </FormControl>
                           <FormMessage className="text-[10px]" />
                         </FormItem>
@@ -158,7 +159,7 @@ export function ContactForm({ className }: ContactFormProps) {
                         <FormItem className="space-y-1">
                           <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-widest">Last Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="Doe" {...field} className="bg-background-muted/30 h-11" />
+                            <Input placeholder="Doe" {...field} className="bg-background-muted/40 h-11 text-text-primary border-accent-border focus:ring-accent-blue" />
                           </FormControl>
                           <FormMessage className="text-[10px]" />
                         </FormItem>
@@ -174,7 +175,7 @@ export function ContactForm({ className }: ContactFormProps) {
                         <FormItem className="space-y-1">
                           <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-widest">Work Email</FormLabel>
                           <FormControl>
-                            <Input placeholder="name@company.com" {...field} className="bg-background-muted/30 h-11" />
+                            <Input placeholder="name@company.com" {...field} className="bg-background-muted/40 h-11 text-text-primary border-accent-border focus:ring-accent-blue" />
                           </FormControl>
                           <FormMessage className="text-[10px]" />
                         </FormItem>
@@ -187,7 +188,7 @@ export function ContactForm({ className }: ContactFormProps) {
                         <FormItem className="space-y-1">
                           <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-widest">Organization</FormLabel>
                           <FormControl>
-                            <Input placeholder="Acme Systems" {...field} className="bg-background-muted/30 h-11" />
+                            <Input placeholder="Acme Systems" {...field} className="bg-background-muted/40 h-11 text-text-primary border-accent-border focus:ring-accent-blue" />
                           </FormControl>
                           <FormMessage className="text-[10px]" />
                         </FormItem>
@@ -203,11 +204,11 @@ export function ContactForm({ className }: ContactFormProps) {
                         <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-widest">Primary Focus Area</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
-                            <SelectTrigger className="bg-background-muted/30 h-11">
+                            <SelectTrigger className="bg-background-muted/40 h-11 text-text-primary border-accent-border focus:ring-accent-blue">
                               <SelectValue placeholder="Select intent..." />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent>
+                          <SelectContent className="bg-white">
                             <SelectItem value="Hardware Architecture">Hardware Architecture</SelectItem>
                             <SelectItem value="Networking Protocols">Networking Protocols</SelectItem>
                             <SelectItem value="Strategic Scaling">Strategic Scaling</SelectItem>
@@ -224,11 +225,14 @@ export function ContactForm({ className }: ContactFormProps) {
                     name="challenge"
                     render={({ field }) => (
                       <FormItem className="space-y-1">
-                        <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-widest">Current Challenge (Optional)</FormLabel>
+                        <div className="flex justify-between items-center">
+                          <FormLabel className="text-text-primary text-[10px] font-bold uppercase tracking-widest">Current Challenge</FormLabel>
+                          <span className="text-[9px] text-text-muted font-bold uppercase tracking-widest opacity-60">Optional</span>
+                        </div>
                         <FormControl>
                           <Textarea 
                             placeholder="Identify immediate bottlenecks..." 
-                            className="bg-background-muted/30 min-h-[100px] resize-none" 
+                            className="bg-background-muted/40 min-h-[100px] md:min-h-[120px] resize-none text-text-primary border-accent-border focus:ring-accent-blue" 
                             {...field} 
                           />
                         </FormControl>
@@ -237,10 +241,10 @@ export function ContactForm({ className }: ContactFormProps) {
                     )}
                   />
 
-                  <div className="space-y-4">
+                  <div className="space-y-4 pt-2">
                     <Button 
                       type="submit" 
-                      className="w-full h-14 text-xs font-bold uppercase tracking-[0.2em] btn-hover-effect bg-accent-blue shadow-lg" 
+                      className="w-full h-14 text-[11px] font-bold uppercase tracking-[0.2em] btn-hover-effect bg-accent-blue text-white shadow-lg hover:bg-accent-navy transition-all duration-300" 
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -262,7 +266,7 @@ export function ContactForm({ className }: ContactFormProps) {
               key="success"
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-12"
+              className="text-center py-10 md:py-12"
             >
               <div className="w-16 h-16 bg-accent-blueLight rounded-full flex items-center justify-center mx-auto mb-6">
                 <CheckCircle2 className="w-8 h-8 text-accent-blue" />
