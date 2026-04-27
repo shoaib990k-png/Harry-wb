@@ -1,50 +1,66 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { CheckCircle2, Star } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export function BookSection() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const defaultTransform = 'rotateY(-5deg) rotateX(3deg)';
+  const hoverTransform = 'rotateY(5deg) rotateX(-3deg) scale(1.04)';
+  
+  const defaultShadow = '-8px 8px 30px rgba(0,0,0,0.6)';
+  const hoverShadow = '-12px 12px 40px rgba(0,0,0,0.7), 0 0 30px rgba(59,130,246,0.15)';
+
+  const commonImgStyle: React.CSSProperties = {
+    position: 'absolute',
+    inset: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    borderRadius: '4px 12px 12px 4px',
+    transition: 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease',
+    transform: isHovered ? hoverTransform : defaultTransform,
+    boxShadow: isHovered ? hoverShadow : defaultShadow,
+  };
+
   return (
     <section className="section-padding bg-background-muted overflow-hidden">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           
           <div className="flex justify-center items-center relative py-12">
-            {/* User provided exact book container code */}
             <div 
-              className="relative w-[300px] h-[420px]"
+              className="relative w-[280px] h-[400px] cursor-pointer"
               style={{ perspective: '1000px' }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             >
-              <div
-                className="relative w-full h-full"
-                style={{
-                  transformStyle: 'preserve-3d',
-                  transition: 'transform 0.8s ease',
-                }}
-                onMouseEnter={e => (e.currentTarget.style.transform = 'rotateY(180deg)')}
-                onMouseLeave={e => (e.currentTarget.style.transform = 'rotateY(0deg)')}
-              >
-                {/* Front */}
-                <div
-                  className="absolute inset-0"
-                  style={{ backfaceVisibility: 'hidden' }}
-                >
-                  <img src="/img/book1.png" alt="Book Front" className="w-full h-full object-contain" />
-                </div>
-
-                {/* Back */}
-                <div
-                  className="absolute inset-0"
-                  style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
-                >
-                  <img src="/img/book2.png" alt="Book Back" className="w-full h-full object-contain" />
-                </div>
-              </div>
+              {/* Back Image (Underneath) */}
+              <img 
+                src="/img/book2.png" 
+                alt="Book Back" 
+                style={{ 
+                  ...commonImgStyle, 
+                  opacity: isHovered ? 1 : 0,
+                  zIndex: 1 
+                }} 
+              />
+              
+              {/* Front Image (Top) */}
+              <img 
+                src="/img/book1.png" 
+                alt="Book Front" 
+                style={{ 
+                  ...commonImgStyle, 
+                  opacity: isHovered ? 0 : 1,
+                  zIndex: 2 
+                }} 
+              />
             </div>
           </div>
 
