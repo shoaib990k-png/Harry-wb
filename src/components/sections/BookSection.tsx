@@ -3,9 +3,8 @@
 import React, { useState } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { CheckCircle2, Star } from 'lucide-react';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -13,19 +12,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export function BookSection() {
   const [isFlipped, setIsFlipped] = useState(false);
   
-  const frontImage = PlaceHolderImages.find(img => img.id === 'book-front')?.imageUrl || "/img/book1.png";
-  const backImage = PlaceHolderImages.find(img => img.id === 'book-back')?.imageUrl || "/img/book2.png";
+  const frontImage = "/img/book1.png";
+  const backImage = "/img/book2.png";
 
   return (
     <section className="section-padding bg-background-muted overflow-hidden">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           
-          <div className="flex justify-center items-center relative py-10 perspective-1000">
+          <div className="flex justify-center items-center relative py-12 perspective-1000">
             <motion.div
               onMouseEnter={() => setIsFlipped(true)}
               onMouseLeave={() => setIsFlipped(false)}
-              className="relative w-full max-w-[320px] aspect-[1/1.4] cursor-pointer group z-10 animate-float"
+              className="relative w-full max-w-[320px] aspect-[1/1.5] cursor-pointer group z-10 animate-float"
               style={{ transformStyle: 'preserve-3d' }}
               animate={{ rotateY: isFlipped ? 180 : 0 }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -39,14 +38,14 @@ export function BookSection() {
               {/* Front Cover */}
               <div 
                 className="absolute inset-0 z-20 overflow-hidden rounded-r-lg shadow-2xl border border-accent-border bg-white"
-                style={{ backfaceVisibility: 'hidden' }}
+                style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
               >
                 <Image
                   src={frontImage}
                   alt="The Quantum Advantage Front"
                   fill
                   sizes="320px"
-                  className="object-cover"
+                  className="object-contain bg-white"
                   priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-white/10 pointer-events-none" />
@@ -57,6 +56,7 @@ export function BookSection() {
                 className="absolute inset-0 z-10 overflow-hidden rounded-l-lg shadow-2xl border border-accent-border bg-white"
                 style={{ 
                   backfaceVisibility: 'hidden',
+                  WebkitBackfaceVisibility: 'hidden',
                   transform: 'rotateY(180deg)'
                 }}
               >
@@ -65,7 +65,7 @@ export function BookSection() {
                   alt="The Quantum Advantage Back"
                   fill
                   sizes="320px"
-                  className="object-cover"
+                  className="object-contain bg-white"
                 />
                 <div className="absolute inset-0 bg-gradient-to-l from-black/10 via-transparent to-white/10 pointer-events-none" />
               </div>
@@ -75,12 +75,13 @@ export function BookSection() {
                 className="absolute top-0 bottom-0 left-0 w-8 bg-gray-200 border-x border-gray-300 z-15"
                 style={{ 
                   transform: 'translateX(-50%) rotateY(-90deg)',
-                  transformOrigin: 'left'
+                  transformOrigin: 'left',
+                  backfaceVisibility: 'hidden'
                 }}
               />
 
               {/* Dynamic Drop Shadow */}
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[80%] h-4 bg-black/20 blur-xl rounded-full" />
+              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[90%] h-6 bg-black/20 blur-2xl rounded-full" />
             </motion.div>
           </div>
 
