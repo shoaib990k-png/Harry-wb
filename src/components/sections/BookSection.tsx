@@ -21,7 +21,8 @@ export function BookSection() {
     inset: 0,
     width: '100%',
     height: '100%',
-    objectFit: 'cover',
+    objectFit: 'contain',
+    background: 'transparent',
     borderRadius: '4px 12px 12px 4px',
     transition: 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease',
     transform: isHovered ? hoverTransform : defaultTransform,
@@ -35,7 +36,7 @@ export function BookSection() {
           
           <div className="flex justify-center items-center relative py-12">
             <div 
-              className="relative w-[280px] h-[400px] cursor-pointer"
+              className="relative w-[220px] h-[340px] cursor-pointer"
               style={{ perspective: '1000px' }}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
