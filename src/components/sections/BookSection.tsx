@@ -1,88 +1,51 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { CheckCircle2, Star } from 'lucide-react';
 import Link from 'next/link';
+import { CheckCircle2, Star } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export function BookSection() {
-  const [isFlipped, setIsFlipped] = useState(false);
-  
-  const frontImage = "/img/book1.png";
-  const backImage = "/img/book2.png";
-
   return (
     <section className="section-padding bg-background-muted overflow-hidden">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           
-          <div className="flex justify-center items-center relative py-12 perspective-1000">
-            <motion.div
-              onMouseEnter={() => setIsFlipped(true)}
-              onMouseLeave={() => setIsFlipped(false)}
-              className="relative w-full max-w-[320px] aspect-[1/1.5] cursor-pointer group z-10 animate-float"
-              style={{ transformStyle: 'preserve-3d' }}
-              animate={{ rotateY: isFlipped ? 180 : 0 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
+          <div className="flex justify-center items-center relative py-12">
+            {/* User provided exact book container code */}
+            <div 
+              className="relative w-[300px] h-[420px]"
+              style={{ perspective: '1000px' }}
             >
-              {/* Bestseller Badge */}
-              <div className="absolute -top-4 -right-8 z-50 bg-accent-blue text-white px-4 py-2 rounded-lg text-[10px] font-bold shadow-lg flex items-center gap-2 pointer-events-none">
-                <span className="w-2 h-2 bg-white/40 rounded-full animate-pulse" />
-                #01 BESTSELLER
-              </div>
-
-              {/* Front Cover */}
-              <div 
-                className="absolute inset-0 z-20 overflow-hidden rounded-r-lg shadow-2xl border border-accent-border bg-white"
-                style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
-              >
-                <Image
-                  src={frontImage}
-                  alt="The Quantum Advantage Front"
-                  fill
-                  sizes="320px"
-                  className="object-contain bg-white"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-white/10 pointer-events-none" />
-              </div>
-
-              {/* Back Cover */}
-              <div 
-                className="absolute inset-0 z-10 overflow-hidden rounded-l-lg shadow-2xl border border-accent-border bg-white"
-                style={{ 
-                  backfaceVisibility: 'hidden',
-                  WebkitBackfaceVisibility: 'hidden',
-                  transform: 'rotateY(180deg)'
+              <div
+                className="relative w-full h-full"
+                style={{
+                  transformStyle: 'preserve-3d',
+                  transition: 'transform 0.8s ease',
                 }}
+                onMouseEnter={e => (e.currentTarget.style.transform = 'rotateY(180deg)')}
+                onMouseLeave={e => (e.currentTarget.style.transform = 'rotateY(0deg)')}
               >
-                <Image
-                  src={backImage}
-                  alt="The Quantum Advantage Back"
-                  fill
-                  sizes="320px"
-                  className="object-contain bg-white"
-                />
-                <div className="absolute inset-0 bg-gradient-to-l from-black/10 via-transparent to-white/10 pointer-events-none" />
+                {/* Front */}
+                <div
+                  className="absolute inset-0"
+                  style={{ backfaceVisibility: 'hidden' }}
+                >
+                  <img src="/img/book1.png" alt="Book Front" className="w-full h-full object-contain" />
+                </div>
+
+                {/* Back */}
+                <div
+                  className="absolute inset-0"
+                  style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                >
+                  <img src="/img/book2.png" alt="Book Back" className="w-full h-full object-contain" />
+                </div>
               </div>
-
-              {/* Book Spine (Thickness Effect) */}
-              <div 
-                className="absolute top-0 bottom-0 left-0 w-8 bg-gray-200 border-x border-gray-300 z-15"
-                style={{ 
-                  transform: 'translateX(-50%) rotateY(-90deg)',
-                  transformOrigin: 'left',
-                  backfaceVisibility: 'hidden'
-                }}
-              />
-
-              {/* Dynamic Drop Shadow */}
-              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[90%] h-6 bg-black/20 blur-2xl rounded-full" />
-            </motion.div>
+            </div>
           </div>
 
           <div className="max-w-xl">
