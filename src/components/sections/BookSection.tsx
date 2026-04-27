@@ -1,10 +1,9 @@
-
 "use client";
 
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { CheckCircle2, Star } from 'lucide-react';
@@ -12,90 +11,76 @@ import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export function BookSection() {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
   
-  const frontImage = PlaceHolderImages.find(img => img.id === 'book-front')?.imageUrl || "";
-  const hoverImage = PlaceHolderImages.find(img => img.id === 'book-hover')?.imageUrl || "";
-  
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  // High performance spring settings for reduced lag
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 30 });
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 30 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const mouseX = (e.clientX - rect.left) / rect.width - 0.5;
-    const mouseY = (e.clientY - rect.top) / rect.height - 0.5;
-    x.set(mouseX);
-    y.set(mouseY);
-  }, [x, y]);
+  const frontImage = PlaceHolderImages.find(img => img.id === 'book-front')?.imageUrl || "/img/book1.png";
+  const backImage = PlaceHolderImages.find(img => img.id === 'book-back')?.imageUrl || "/img/book2.png";
 
   return (
     <section className="section-padding bg-background-muted overflow-hidden">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           
-          <div className="flex justify-center items-center relative py-10">
+          <div className="flex justify-center items-center relative py-10 perspective-1000">
             <motion.div
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={() => {
-                setIsHovered(false);
-                x.set(0);
-                y.set(0);
-              }}
-              style={{
-                rotateX,
-                rotateY,
-                transformStyle: "preserve-3d",
-              }}
-              className="relative w-full max-w-[320px] aspect-[1/1.4] cursor-pointer group z-10 will-change-transform transform-gpu"
+              onMouseEnter={() => setIsFlipped(true)}
+              onMouseLeave={() => setIsFlipped(false)}
+              className="relative w-full max-w-[320px] aspect-[1/1.4] cursor-pointer group z-10 animate-float"
+              style={{ transformStyle: 'preserve-3d' }}
+              animate={{ rotateY: isFlipped ? 180 : 0 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
             >
-              <div className="absolute -top-4 -right-8 z-30 bg-accent-blue text-white px-4 py-2 rounded-lg text-[10px] font-bold shadow-lg flex items-center gap-2 pointer-events-none">
+              {/* Bestseller Badge */}
+              <div className="absolute -top-4 -right-8 z-50 bg-accent-blue text-white px-4 py-2 rounded-lg text-[10px] font-bold shadow-lg flex items-center gap-2 pointer-events-none">
                 <span className="w-2 h-2 bg-white/40 rounded-full animate-pulse" />
                 #01 BESTSELLER
               </div>
 
-              <div className="absolute inset-0 z-10 overflow-hidden rounded-lg shadow-2xl border border-accent-border bg-white">
-                <motion.div 
-                  className="absolute inset-0 will-change-opacity"
-                  animate={{ opacity: isHovered ? 0 : 1 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <Image
-                    src={frontImage}
-                    alt="The Quantum Advantage Front"
-                    fill
-                    sizes="320px"
-                    className="object-cover"
-                    priority
-                  />
-                </motion.div>
-
-                <motion.div 
-                  className="absolute inset-0 will-change-opacity"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: isHovered ? 1 : 0 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <Image
-                    src={hoverImage}
-                    alt="The Quantum Advantage Angle"
-                    fill
-                    sizes="320px"
-                    className="object-cover"
-                  />
-                </motion.div>
-                
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/20 pointer-events-none" />
+              {/* Front Cover */}
+              <div 
+                className="absolute inset-0 z-20 overflow-hidden rounded-r-lg shadow-2xl border border-accent-border bg-white"
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                <Image
+                  src={frontImage}
+                  alt="The Quantum Advantage Front"
+                  fill
+                  sizes="320px"
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-white/10 pointer-events-none" />
               </div>
-              
-              <div className="absolute inset-0 bg-white/50 rounded-lg -z-10 translate-x-2 translate-y-2 border border-accent-border" />
+
+              {/* Back Cover */}
+              <div 
+                className="absolute inset-0 z-10 overflow-hidden rounded-l-lg shadow-2xl border border-accent-border bg-white"
+                style={{ 
+                  backfaceVisibility: 'hidden',
+                  transform: 'rotateY(180deg)'
+                }}
+              >
+                <Image
+                  src={backImage}
+                  alt="The Quantum Advantage Back"
+                  fill
+                  sizes="320px"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-l from-black/10 via-transparent to-white/10 pointer-events-none" />
+              </div>
+
+              {/* Book Spine (Thickness Effect) */}
+              <div 
+                className="absolute top-0 bottom-0 left-0 w-8 bg-gray-200 border-x border-gray-300 z-15"
+                style={{ 
+                  transform: 'translateX(-50%) rotateY(-90deg)',
+                  transformOrigin: 'left'
+                }}
+              />
+
+              {/* Dynamic Drop Shadow */}
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[80%] h-4 bg-black/20 blur-xl rounded-full" />
             </motion.div>
           </div>
 
