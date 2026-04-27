@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useEffect, useState, memo } from 'react';
@@ -54,23 +55,26 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-[85svh] sm:min-h-svh flex items-center bg-background-hero overflow-hidden py-16 sm:py-20 pt-28 sm:pt-32">
-      <div className="absolute inset-0 z-0 pointer-events-none transform-gpu transform-gpu">
-        {heroImage && (
-          <Image
-            src={`${heroImage.imageUrl}&w=1200&q=75`}
-            alt="Strategic Background"
-            fill
-            className="object-cover opacity-40"
-            priority
-            sizes="100vw"
-            quality={75}
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-b from-background-hero/70 via-background-hero/90 to-background-hero" />
-      </div>
+    <section className="relative min-h-[85svh] sm:min-h-svh flex items-center bg-[#0F1624] overflow-hidden py-16 sm:py-20 pt-28 sm:pt-32">
+      {/* Background Image Layer */}
+      {heroImage && (
+        <Image
+          src={heroImage.imageUrl}
+          alt="Space Background"
+          fill
+          className="object-cover opacity-50 z-0 select-none pointer-events-none"
+          priority
+          sizes="100vw"
+        />
+      )}
+      
+      {/* Dark Overlay Layer */}
+      <div 
+        className="absolute inset-0 z-[1] select-none pointer-events-none" 
+        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.8))' }}
+      />
 
-      <Container className="relative z-10 w-full">
+      <Container className="relative z-[2] w-full">
         <motion.div 
           className="max-w-3xl"
           variants={containerVariants}
