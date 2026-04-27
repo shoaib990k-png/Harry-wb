@@ -21,7 +21,7 @@ export function BookSection() {
     inset: 0,
     width: '100%',
     height: '100%',
-    objectFit: 'contain',
+    objectPosition: 'center center',
     background: 'transparent',
     borderRadius: '4px 12px 12px 4px',
     transition: 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease',
@@ -47,6 +47,7 @@ export function BookSection() {
                 alt="Book Back" 
                 style={{ 
                   ...commonImgStyle, 
+                  objectFit: 'fill',
                   opacity: isHovered ? 1 : 0,
                   zIndex: 1 
                 }} 
@@ -58,6 +59,7 @@ export function BookSection() {
                 alt="Book Front" 
                 style={{ 
                   ...commonImgStyle, 
+                  objectFit: 'contain',
                   opacity: isHovered ? 0 : 1,
                   zIndex: 2 
                 }} 
