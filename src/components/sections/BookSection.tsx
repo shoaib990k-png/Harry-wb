@@ -27,6 +27,7 @@ export function BookSection() {
     transition: 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease',
     transform: isHovered ? hoverTransform : defaultTransform,
     boxShadow: isHovered ? hoverShadow : defaultShadow,
+    willChange: 'transform, opacity',
   };
 
   return (
@@ -36,7 +37,7 @@ export function BookSection() {
           
           <div className="flex justify-center items-center relative py-12">
             <div 
-              className="relative w-[220px] h-[340px] cursor-pointer"
+              className="relative w-[220px] h-[340px] cursor-pointer transform-gpu"
               style={{ perspective: '1000px' }}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
@@ -100,7 +101,7 @@ export function BookSection() {
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
               <Button asChild size="lg" className="bg-accent-blue hover:bg-accent-navy text-white px-8 h-14 uppercase font-bold tracking-widest text-xs rounded-xl shadow-lg btn-hover-effect">
-                <Link href="/contact">Order Hardcover</Link>
+                <Link href="/contact" prefetch={true}>Order Hardcover</Link>
               </Button>
               
               <div className="flex items-center gap-4">

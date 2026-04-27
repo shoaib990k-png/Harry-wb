@@ -8,7 +8,7 @@ export function Footer() {
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16">
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center space-x-2 mb-6">
+            <Link href="/" prefetch={true} className="flex items-center space-x-2 mb-6">
               <div className="w-6 h-6 bg-accent-blue rounded flex items-center justify-center text-white font-bold text-sm">S</div>
               <span className="font-bold text-lg text-text-primary">Strategic Architect</span>
             </Link>
@@ -20,18 +20,18 @@ export function Footer() {
           <div>
             <h4 className="font-bold text-text-primary mb-4 text-sm uppercase tracking-wider">Solutions</h4>
             <ul className="space-y-3">
-              <li><Link href="/solutions#hardware" className="text-text-muted hover:text-accent-blue transition-colors text-sm">Hardware Systems</Link></li>
-              <li><Link href="/solutions#protocols" className="text-text-muted hover:text-accent-blue transition-colors text-sm">Logic Protocols</Link></li>
-              <li><Link href="/solutions#strategy" className="text-text-muted hover:text-accent-blue transition-colors text-sm">Strategic Insight</Link></li>
+              <li><Link href="/solutions#hardware" prefetch={true} className="text-text-muted hover:text-accent-blue transition-colors text-sm">Hardware Systems</Link></li>
+              <li><Link href="/solutions#protocols" prefetch={true} className="text-text-muted hover:text-accent-blue transition-colors text-sm">Logic Protocols</Link></li>
+              <li><Link href="/solutions#strategy" prefetch={true} className="text-text-muted hover:text-accent-blue transition-colors text-sm">Strategic Insight</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-bold text-text-primary mb-4 text-sm uppercase tracking-wider">Company</h4>
             <ul className="space-y-3">
-              <li><Link href="/about" className="text-text-muted hover:text-accent-blue transition-colors text-sm">About Founder</Link></li>
-              <li><Link href="/the-book" className="text-text-muted hover:text-accent-blue transition-colors text-sm">The Book</Link></li>
-              <li><Link href="/contact" className="text-text-muted hover:text-accent-blue transition-colors text-sm">Contact</Link></li>
+              <li><Link href="/about" prefetch={true} className="text-text-muted hover:text-accent-blue transition-colors text-sm">About Founder</Link></li>
+              <li><Link href="/the-book" prefetch={true} className="text-text-muted hover:text-accent-blue transition-colors text-sm">The Book</Link></li>
+              <li><Link href="/contact" prefetch={true} className="text-text-muted hover:text-accent-blue transition-colors text-sm">Contact</Link></li>
             </ul>
           </div>
 

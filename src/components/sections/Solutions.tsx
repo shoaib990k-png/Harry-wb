@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from 'react';
@@ -60,12 +59,12 @@ export function Solutions() {
               transition={{ delay: idx * 0.1, duration: 0.5 }}
               className="group"
             >
-              <Link href={`/solutions#${item.id}`}>
-                <div className="card-hover-effect bg-background-page border border-accent-border rounded-xl overflow-hidden h-full">
+              <Link href={`/solutions#${item.id}`} prefetch={true}>
+                <div className="card-hover-effect bg-background-page border border-accent-border rounded-xl overflow-hidden h-full transform-gpu">
                   <div className="relative h-56 overflow-hidden">
                     {item.image && (
                       <Image 
-                        src={item.image} 
+                        src={`${item.image}&w=600&q=70`} 
                         alt={item.title} 
                         fill 
                         className="object-cover transition-transform duration-500 group-hover:scale-105"

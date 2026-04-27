@@ -55,10 +55,10 @@ export function Hero() {
 
   return (
     <section className="relative min-h-[85svh] sm:min-h-svh flex items-center bg-background-hero overflow-hidden py-16 sm:py-20 pt-28 sm:pt-32">
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none transform-gpu">
         {heroImage && (
           <Image
-            src={heroImage.imageUrl}
+            src={`${heroImage.imageUrl}&w=1200&q=75`}
             alt="Strategic Background"
             fill
             className="object-cover opacity-40"
@@ -101,10 +101,10 @@ export function Hero() {
 
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12 sm:mb-16">
             <Button asChild size="lg" className="bg-accent-blue hover:bg-accent-navy text-white transition-colors h-12 sm:h-14 px-8 w-full sm:w-auto">
-              <Link href="/contact">Launch Partnership</Link>
+              <Link href="/contact" prefetch={true}>Launch Partnership</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10 h-12 sm:h-14 px-8 w-full sm:w-auto">
-              <Link href="/solutions">Explore Solutions</Link>
+              <Link href="/solutions" prefetch={true}>Explore Solutions</Link>
             </Button>
           </motion.div>
 

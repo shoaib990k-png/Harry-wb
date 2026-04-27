@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { SectionLabel } from '@/components/ui/SectionLabel';
@@ -14,11 +13,11 @@ export function FounderSection() {
     <section className="section-padding bg-white">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-center">
-          <div className="relative group">
+          <div className="relative group transform-gpu">
             <div className="aspect-[3/4] relative rounded-2xl overflow-hidden border border-accent-border">
               {founderImg && (
                 <Image 
-                  src={founderImg.imageUrl} 
+                  src={`${founderImg.imageUrl}&w=800&q=80`} 
                   alt="Joel Kremer, Founder of Strategic Architect" 
                   fill 
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -49,10 +48,10 @@ export function FounderSection() {
             
             <div className="mt-10 flex flex-wrap gap-4">
               <Button asChild variant="outline" className="border-accent-border hover:border-accent-blue hover:text-accent-blue h-12">
-                <Link href="/about">View Full Profile</Link>
+                <Link href="/about" prefetch={true}>View Full Profile</Link>
               </Button>
               <Button asChild variant="ghost" className="text-text-muted hover:text-accent-blue h-12">
-                <Link href="/contact">Book Consultation</Link>
+                <Link href="/contact" prefetch={true}>Book Consultation</Link>
               </Button>
             </div>
           </div>

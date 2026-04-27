@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
@@ -50,13 +49,13 @@ export function Navbar() {
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 flex items-center will-change-transform",
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 flex items-center transform-gpu will-change-transform",
       scrolled 
         ? "bg-white/95 backdrop-blur-md border-b border-accent-border shadow-sm h-16" 
         : "bg-transparent h-20"
     )}>
       <Container className="flex items-center justify-between">
-        <Link href="/" className="group flex items-center space-x-2">
+        <Link href="/" prefetch={true} className="group flex items-center space-x-2">
           <div className="w-8 h-8 bg-accent-blue rounded flex items-center justify-center text-white font-bold text-lg shrink-0 shadow-sm">S</div>
           <span className={cn(
             "font-bold text-lg md:text-xl tracking-tight transition-colors duration-300",
@@ -71,6 +70,7 @@ export function Navbar() {
             <Link 
               key={link.name} 
               href={link.href}
+              prefetch={true}
               className={cn(
                 "relative text-sm font-medium transition-colors hover:text-accent-blue py-1 group",
                 isTextDark ? "text-text-secondary" : "text-white/80"
@@ -87,7 +87,7 @@ export function Navbar() {
             "btn-hover-effect font-bold tracking-wider text-xs px-6",
             !scrolled && isDarkHeroPage ? "bg-white text-accent-blue hover:bg-white/90 border-none" : "bg-accent-blue text-white"
           )}>
-            <Link href="/contact">Get Started</Link>
+            <Link href="/contact" prefetch={true}>Get Started</Link>
           </Button>
         </div>
 
@@ -131,6 +131,7 @@ export function Navbar() {
                   <Link 
                     key={link.name} 
                     href={link.href}
+                    prefetch={true}
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-lg font-semibold text-text-secondary hover:text-accent-blue transition-colors"
                   >
@@ -138,7 +139,7 @@ export function Navbar() {
                   </Link>
                 ))}
                 <Button asChild className="w-full mt-4 h-12 bg-accent-blue text-white" onClick={() => setMobileMenuOpen(false)}>
-                  <Link href="/contact">Get Started</Link>
+                  <Link href="/contact" prefetch={true}>Get Started</Link>
                 </Button>
               </div>
             </motion.div>
