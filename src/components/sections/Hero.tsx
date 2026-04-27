@@ -55,7 +55,7 @@ export function Hero() {
 
   return (
     <section className="relative min-h-[85svh] sm:min-h-svh flex items-center bg-background-hero overflow-hidden py-16 sm:py-20 pt-28 sm:pt-32">
-      <div className="absolute inset-0 z-0 pointer-events-none transform-gpu">
+      <div className="absolute inset-0 z-0 pointer-events-none transform-gpu transform-gpu">
         {heroImage && (
           <Image
             src={`${heroImage.imageUrl}&w=1200&q=75`}
@@ -114,7 +114,7 @@ export function Hero() {
           >
             <div className="text-center sm:text-left">
               <p className="text-white text-xl sm:text-3xl font-bold mb-0.5"><Counter value={2} suffix=".5YR" /></p>
-              <p className="label-mono text-white/40 text-[9px] sm:text-[10px]">Market Presence</p>
+              <p className="label-mono text-white/40 text-[9px] sm:text-[10px]">Research Cycle</p>
             </div>
             <div className="text-center sm:text-left border-x border-white/10 px-2 sm:px-0 sm:border-none">
               <p className="text-white text-xl sm:text-3xl font-bold mb-0.5"><Counter value={3} suffix="" /></p>

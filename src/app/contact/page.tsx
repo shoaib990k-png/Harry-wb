@@ -30,7 +30,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-[10px] text-white/40 label-mono mb-0.5">EMAIL</p>
-                    <p className="text-white text-sm font-bold">architect@strategic.tech</p>
+                    <p className="text-white text-sm font-bold">shoaib990k@gmail.com</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
@@ -39,7 +39,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-[10px] text-white/40 label-mono mb-0.5">PHONE</p>
-                    <p className="text-white text-sm font-bold">+1 (800) LOGIC-STACK</p>
+                    <p className="text-white text-sm font-bold">03122457391</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
@@ -47,8 +47,8 @@ export default function ContactPage() {
                     <MapPin className="w-5 h-5 text-accent-blue" />
                   </div>
                   <div>
-                    <p className="text-[10px] text-white/40 label-mono mb-0.5">HEADQUARTERS</p>
-                    <p className="text-white text-sm font-bold">Silicon Valley, CA</p>
+                    <p className="text-[10px] text-white/40 label-mono mb-0.5">Location</p>
+                    <p className="text-white text-sm font-bold">Karachi,Pakistan</p>
                   </div>
                 </div>
               </div>

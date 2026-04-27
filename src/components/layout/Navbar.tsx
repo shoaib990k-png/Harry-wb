@@ -38,10 +38,8 @@ export function Navbar() {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
-    // Initial check
     const initialScrolled = window.scrollY > 20;
     if (initialScrolled !== scrolled) setScrolled(initialScrolled);
-    
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll, scrolled]);
 
@@ -84,10 +82,10 @@ export function Navbar() {
             </Link>
           ))}
           <Button asChild className={cn(
-            "btn-hover-effect font-bold tracking-wider text-xs px-6",
+            "btn-hover-effect font-bold tracking-wider text-[10px] uppercase px-6 h-10",
             !scrolled && isDarkHeroPage ? "bg-white text-accent-blue hover:bg-white/90 border-none" : "bg-accent-blue text-white"
           )}>
-            <Link href="/contact" prefetch={true}>Get Started</Link>
+            <Link href="/contact" prefetch={true}>Get Free Chapter →</Link>
           </Button>
         </div>
 
@@ -139,7 +137,7 @@ export function Navbar() {
                   </Link>
                 ))}
                 <Button asChild className="w-full mt-4 h-12 bg-accent-blue text-white" onClick={() => setMobileMenuOpen(false)}>
-                  <Link href="/contact" prefetch={true}>Get Started</Link>
+                  <Link href="/contact" prefetch={true}>Get Free Chapter →</Link>
                 </Button>
               </div>
             </motion.div>
